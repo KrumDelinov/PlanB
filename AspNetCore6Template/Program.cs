@@ -42,6 +42,8 @@ builder.Services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
 builder.Services.AddTransient<IEmailSender, NullMessageSender>();
 builder.Services.AddTransient<ISettingsService, SettingsService>();
+builder.Services.AddTransient<IUsersService, UsersService>();
+builder.Services.AddTransient<IRolesService, RolesService>();
 
 var app = builder.Build();
 
@@ -55,22 +57,9 @@ using (var serviceScope = app.Services.CreateScope())
     var services = serviceScope.ServiceProvider;
 
     await new ApplicationDbContextSeeder().SeedAsync(services);
-    //new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
 }
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
-//    var context = services.GetRequiredService<ApplicationDbContext>();
-//    context.Database.Migrate();
-//    // requires using Microsoft.Extensions.Configuration;
-//    // Set password with the Secret Manager tool.
-//    // dotnet user-secrets set SeedUserPW <pw>
-//
-//    var testUserPw = builder.Configuration.GetValue<string>("SeedUserPW");
-//
-//    await SeedData.Initialize(services, testUserPw);
-//}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

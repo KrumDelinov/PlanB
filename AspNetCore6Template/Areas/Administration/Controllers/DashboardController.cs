@@ -4,20 +4,27 @@
     using PlanB.Web.ViewModels.Administration.Dashboard;
 
     using Microsoft.AspNetCore.Mvc;
+    using PlanB.Data;
 
     public class DashboardController : AdministrationController
     {
-        private readonly ISettingsService settingsService;
+        private readonly IUsersService usersService;
+        private readonly IRolesService rolesService;
+        private readonly ApplicationDbContext dbContext;
 
-        public DashboardController(ISettingsService settingsService)
+        public DashboardController(IUsersService usersService, IRolesService rolesService, ApplicationDbContext dbContext)
         {
-            this.settingsService = settingsService;
+            this.usersService = usersService;
+            this.rolesService = rolesService;
+            this.dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
-            var viewModel = new IndexViewModel { SettingsCount = this.settingsService.GetCount(), };
-            return this.View(viewModel);
+            var users = this.usersService.GetAll<UserViewModel>();
+            var roles = this.rolesService.GetAll<RoleViewModel>();
+            var model = new IndexViewModel { Users = users, Roles = roles};
+            return this.View(model);
         }
     }
 }
