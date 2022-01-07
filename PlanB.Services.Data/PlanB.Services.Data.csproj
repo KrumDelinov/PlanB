@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PlanB.Data.Common\PlanB.Data.Common.csproj" />
+    <ProjectReference Include="..\PlanB.Data.Models\PlanB.Data.Models.csproj" />
+    <ProjectReference Include="..\PlanB.Services.Mapping\PlanB.Services.Mapping.csproj" />
+  </ItemGroup>
+
+</Project>

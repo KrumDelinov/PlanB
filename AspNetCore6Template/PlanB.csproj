@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-AspNetCore6Template-CC2F32C7-287F-46AD-8EEF-A620F9A3BE5E</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PlanB.Common\PlanB.Common.csproj" />
+    <ProjectReference Include="..\PlanB.Data\PlanB.Data.csproj" />
+    <ProjectReference Include="..\PlanB.Services.Data\PlanB.Services.Data.csproj" />
+    <ProjectReference Include="..\PlanB.Services.Messaging\PlanB.Services.Messaging.csproj" />
+    <ProjectReference Include="..\PlanB.Web.ViewModels\PlanB.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
