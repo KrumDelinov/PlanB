@@ -18,6 +18,11 @@ namespace PlanB.Data.Models
         }
 
         // Audit info
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }

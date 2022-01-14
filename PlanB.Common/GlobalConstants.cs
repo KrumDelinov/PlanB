@@ -6,6 +6,6 @@
 
         public const string AdministratorRoleName = "Administrator";
         public const string ManagerRoleName = "Manager";
-        public const string EmploeeRoleName = "Emploee";
+        public const string EmploeeRoleName = "Employee";
     }
 }

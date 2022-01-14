@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PlanB.Web.ViewModels.Administration.Dashboard
 {
-    public class UserViewModel : IMapFrom<ApplicationUser>
+    public class UserViewModel 
     {
         public string Id { get; set; }
 
@@ -17,6 +17,6 @@ namespace PlanB.Web.ViewModels.Administration.Dashboard
 
         public string PhomeNumber { get; set; }
 
-
+        public ICollection<RoleViewModel> Roles{ get; set;}
     }
 }

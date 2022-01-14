@@ -3,6 +3,7 @@
     this.ViewData["Title"] = "Admin dashboard";
     var roles = String.Empty;
     var row = 1;
+    var asd = "asd";
 }
 
 <h1>@this.ViewData["Title"]</h1>
@@ -17,18 +18,22 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var user in @Model.Users)
-    {
-        
+        @foreach (var user in @Model.Users)
+        {
             <tr>
                 <th scope="row">@row</th>
                 <td>@user.Id</td>
                 <td>@user.Email</td>
                 <td>@user.PhomeNumber</td>
-                <td>asdf</td>
+                <td>@(roles = string.Join(" | ", user.Roles.Select(x => x.Name)))</td>
+                <td>
+                    <div class="btn">
+                        <a asp-action="UserDetails" asp-route-id="@user.Id" class="btn btn-primary" style="width:auto">Edit</a>
+                    </div>
+                </td>
             </tr>
-        @(row++)
-    }
+            @(row++)
+        }
     </tbody>
 
 </table>

@@ -19,11 +19,10 @@
             this.dbContext = dbContext;
         }
 
-        public IActionResult Index()
+        public async Task< IActionResult> Index()
         {
-            var users = this.usersService.GetAll<UserViewModel>();
-            var roles = this.rolesService.GetAll<RoleViewModel>();
-            var model = new IndexViewModel { Users = users, Roles = roles};
+            
+            var model = await this.usersService.GetUsersWithRolesAsync();
             return this.View(model);
         }
     }

@@ -10,6 +10,7 @@
     <ProjectReference Include="..\PlanB.Data.Common\PlanB.Data.Common.csproj" />
     <ProjectReference Include="..\PlanB.Data.Models\PlanB.Data.Models.csproj" />
     <ProjectReference Include="..\PlanB.Services.Mapping\PlanB.Services.Mapping.csproj" />
+    <ProjectReference Include="..\PlanB.Web.ViewModels\PlanB.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlanB.Web.ViewModels.Administration.Dashboard;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,7 @@ namespace PlanB.Services.Data
     public interface IUsersService
     {
         IEnumerable<T> GetAll<T>();
+
+        Task<IndexViewModel> GetUsersWithRolesAsync();
     }
 }

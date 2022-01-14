@@ -1,4 +1,4 @@
-﻿using PlanB.Data;
+using PlanB.Data;
 using PlanB.Data.Common;
 using PlanB.Data.Common.Repositories;
 using PlanB.Data.Models;
