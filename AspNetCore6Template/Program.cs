@@ -33,7 +33,10 @@ builder.Services.AddControllersWithViews(
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 }).AddRazorRuntimeCompilation();
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddRazorPagesOptions(option =>
+{
+    option.Conventions.AddAreaPageRoute("Identity","/Accaunt/Manage","Index/id?");
+});
 builder.Services.AddSingleton(builder.Configuration);
 
 builder.Services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));

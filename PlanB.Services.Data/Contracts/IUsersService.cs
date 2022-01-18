@@ -12,5 +12,7 @@ namespace PlanB.Services.Data
         IEnumerable<T> GetAll<T>();
 
         Task<IndexViewModel> GetUsersWithRolesAsync();
+
+        Task<EditUserViewModel> EditUser(string id);
     }
 }

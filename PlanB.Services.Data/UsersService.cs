@@ -26,6 +26,36 @@ namespace PlanB.Services.Data
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
+
+        public async Task<EditUserViewModel> EditUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            var userName = await userManager.GetUserNameAsync(user);
+            var phoneNumber = await userManager.GetPhoneNumberAsync(user);
+            var userRolles = await userManager.GetRolesAsync(user);
+            var roles = roleManager.Roles.Select(n => n.Name).ToList();
+
+            //var allRoles = new List<RoleViewModel>();
+            //foreach (var role in roles)
+            //{
+            //    var newRole = new RoleViewModel {Id = role.Id, Name = role.Name};
+            //    allRoles.Add(newRole);
+            //}
+
+            var viewModel = new EditUserViewModel
+            {
+                Id = id,
+                UserName = userName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = phoneNumber,
+                UserRolles = $"{(userRolles.Count > 0 ? string.Join(", ", userRolles) : "No roles")}"  ,
+                AllRoles = roles,
+            };
+
+            return viewModel;
+        }
+
         public IEnumerable<T> GetAll<T>()
         {
             return this.usersRepository.All().To<T>().ToList();

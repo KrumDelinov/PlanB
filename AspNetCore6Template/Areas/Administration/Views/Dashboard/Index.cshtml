@@ -28,7 +28,7 @@
                 <td>@(roles = string.Join(" | ", user.Roles.Select(x => x.Name)))</td>
                 <td>
                     <div class="btn">
-                        <a asp-action="UserDetails" asp-route-id="@user.Id" class="btn btn-primary" style="width:auto">Edit</a>
+                        <a asp-area="Administration" asp-controller="Dashboard" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary" style="width:auto">Edit</a>
                     </div>
                 </td>
             </tr>

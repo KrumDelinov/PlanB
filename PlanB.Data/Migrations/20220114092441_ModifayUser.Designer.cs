@@ -12,7 +12,7 @@ using PlanB.Data;
 namespace PlanB.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220114082602_ModifayUser")]
+    [Migration("20220114092441_ModifayUser")]
     partial class ModifayUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
