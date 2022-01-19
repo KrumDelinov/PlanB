@@ -30,6 +30,8 @@ namespace PlanB.Web.ViewModels.Administration.Dashboard
         [Required]
         public string UserRolles { get; set; }
 
-        public IEnumerable<string> AllRoles { get; set; }
+        public IEnumerable<string> AllUserRoles { get; set; }
+
+        public IEnumerable<string> AllNoUserRoles { get; set; }
     }
 }

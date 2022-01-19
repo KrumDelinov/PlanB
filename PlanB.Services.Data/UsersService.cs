@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace PlanB.Services.Data
 {
@@ -26,6 +28,8 @@ namespace PlanB.Services.Data
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
+
+        public ClaimsPrincipal User { get; private set; }
 
         public async Task<EditUserViewModel> EditUser(string id)
         {
@@ -49,8 +53,9 @@ namespace PlanB.Services.Data
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 PhoneNumber = phoneNumber,
-                UserRolles = $"{(userRolles.Count > 0 ? string.Join(", ", userRolles) : "No roles")}"  ,
-                AllRoles = roles,
+                UserRolles = $"{(userRolles.Count > 0 ? string.Join(", ", userRolles) : "No roles")}",
+                AllUserRoles = userRolles,
+                AllNoUserRoles = roles
             };
 
             return viewModel;
@@ -61,13 +66,19 @@ namespace PlanB.Services.Data
             return this.usersRepository.All().To<T>().ToList();
         }
 
+        public async Task<ApplicationUser> GetCurrentUser()
+        {
+
+            return await userManager.GetUserAsync(this.User);
+        }
+
         public async Task<IndexViewModel> GetUsersWithRolesAsync()
         {
-            
+
             var models = new List<UserViewModel>();
             var users = await userManager.Users.ToListAsync();
 
-           
+
 
             foreach (var user in users)
             {
@@ -85,7 +96,7 @@ namespace PlanB.Services.Data
                     userRoles.Add(roleModel);
                 }
 
-                var userModel = new UserViewModel 
+                var userModel = new UserViewModel
                 {
                     Id = user.Id,
                     PhomeNumber = user.PhoneNumber,
@@ -95,7 +106,7 @@ namespace PlanB.Services.Data
                 models.Add(userModel);
             }
 
-            var viewModel = new IndexViewModel() { Users = models};
+            var viewModel = new IndexViewModel() { Users = models };
             return viewModel;
         }
     }

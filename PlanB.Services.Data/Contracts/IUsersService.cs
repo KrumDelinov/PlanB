@@ -1,4 +1,5 @@
-﻿using PlanB.Web.ViewModels.Administration.Dashboard;
+﻿using PlanB.Data.Models;
+using PlanB.Web.ViewModels.Administration.Dashboard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace PlanB.Services.Data
         Task<IndexViewModel> GetUsersWithRolesAsync();
 
         Task<EditUserViewModel> EditUser(string id);
+
+        Task<ApplicationUser> GetCurrentUser();
     }
 }

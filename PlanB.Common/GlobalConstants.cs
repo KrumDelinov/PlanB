@@ -7,5 +7,7 @@
         public const string AdministratorRoleName = "Administrator";
         public const string ManagerRoleName = "Manager";
         public const string EmploeeRoleName = "Employee";
+        public const string AddRole = "Add to role";
+        public const string RemoveFromRole = "Remove from role";
     }
 }

@@ -1,4 +1,5 @@
-﻿@model PlanB.Web.ViewModels.Administration.Dashboard.EditUserViewModel
+﻿@using PlanB.Common
+@model PlanB.Web.ViewModels.Administration.Dashboard.EditUserViewModel
 @{
     this.ViewData["Title"] = "Admin dashboard";
     //var roles = Model.AllRoles.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
@@ -34,20 +35,20 @@
                 <label asp-for=@Model.UserRolles class="form-label"></label>
             </div>
             <div title="Asd">
-                <label asp-for=@Model.UserRolles class="form-label">Add To Role</label>
+                
                 <select class="form-select was-validated" name="AddRole" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    @foreach (var name in Model.AllRoles)
+                    <option selected>@GlobalConstants.AddRole</option>
+                    @foreach (var name in Model.AllNoUserRoles)
                     {
                         <option value="@name">@name</option>
                     }
                 </select>
             </div>
              <div title="Asd2">
-                <label asp-for=@Model.UserRolles class="form-label">Remove from Role</label>
+                
                 <select class="form-select was-validated" name="RemoveRole" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    @foreach (var name in Model.AllRoles)
+                    <option selected>@GlobalConstants.RemoveFromRole</option>
+                    @foreach (var name in Model.AllUserRoles)
                     {
                         <option value="@name">@name</option>
                     }
@@ -59,4 +60,7 @@
         </form>
     </div>
 </div>
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
 

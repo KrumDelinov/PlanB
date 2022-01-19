@@ -8,12 +8,19 @@
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" asp-route-id= "@this.User.Identity.Name" title="Manage">Hello @this.User.Identity.Name!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index"  title="Manage">Hello @this.User.Identity.Name!</a>
         </li>
+
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+            </li>
+        }
+          if (this.User.IsInRole(GlobalConstants.EmploeeRoleName))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Employee" asp-controller="Home" asp-action="Index" title="Employee">Dashboard</a>
             </li>
         }
         <li class="nav-item">

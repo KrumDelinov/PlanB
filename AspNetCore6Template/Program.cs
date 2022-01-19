@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using PlanB.Services.Data.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ builder.Services.AddTransient<IEmailSender, NullMessageSender>();
 builder.Services.AddTransient<ISettingsService, SettingsService>();
 builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IRolesService, RolesService>();
+builder.Services.AddTransient<IMassagesService, MassagesService>();
 
 var app = builder.Build();
 

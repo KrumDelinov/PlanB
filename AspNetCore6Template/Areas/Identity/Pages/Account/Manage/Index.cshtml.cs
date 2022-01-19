@@ -103,29 +103,19 @@ namespace PlanB.Areas.Identity.Pages.Account.Manage
             };
         }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+  
+
+        public async Task<IActionResult> OnGetAsync()
         {
-            var user = await _userManager.FindByNameAsync(id);
+            var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
+        
             await LoadAsync(user);
             return Page();
         }
-
-        //public async Task<IActionResult> OnGetAsync()
-        //{
-        //    var user = await _userManager.GetUserAsync(User);
-        //    if (user == null)
-        //    {
-        //        return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-        //    }
-        //
-        //    await LoadAsync(user);
-        //    return Page();
-        //}
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -161,12 +151,7 @@ namespace PlanB.Areas.Identity.Pages.Account.Manage
                 user.LastName = Input.LastName;
             }
 
-            string roleName = Request.Form["Select"].ToString();
-            bool isInRole = await IsAdminRole(user, roleName);
-            if (!isInRole)
-            {
-                var result = await _userManager.AddToRoleAsync(user, roleName);
-            }
+          
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
@@ -174,9 +159,6 @@ namespace PlanB.Areas.Identity.Pages.Account.Manage
             return RedirectToPage();
         }
 
-        private async Task<bool> IsAdminRole(ApplicationUser user, string roleName)
-        {
-            return await _userManager.IsInRoleAsync(user, roleName);
-        }
+       
     }
 }
