@@ -1,6 +1,7 @@
 ﻿using PlanB.Data.Common.Repositories;
 using PlanB.Data.Models;
 using PlanB.Services.Data.Contracts;
+using PlanB.Services.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,11 @@ namespace PlanB.Services.Data
             await this.massagesRepository.AddAsync(massage);
             await this.massagesRepository.SaveChangesAsync();
             return massage.Id;
+        }
+
+        public IEnumerable<T> GetAll<T>()
+        {
+            return this.massagesRepository.All().To<T>().ToList();
         }
     }
 }

@@ -25,22 +25,39 @@ namespace PlanB.Areas.Employee.Controllers
         public  IActionResult Index()
         {
 
+            return this.View();
+        }
+
+        public IActionResult All()
+        {
+            var massage = this.massagesService.GetAll<MassageInfoViewModel>();
+            var model = new AllMassagesViewModel { Massages = massage, StatusMessage = "Your profile has been updated" };
+            return this.View(model);
+        }
+
+        public async Task<IActionResult> CreateAsync()
+        {
+            
             var users = usersService.GetAll<UserDropDownViewModel>();
-            var viewModel = new MassageViewModel { Users = users};
+            var viewModel = new MassageViewModel { Users = users };
             return this.View(viewModel);
         }
         [HttpPost]
-        public async Task< IActionResult> Index(MassageViewModel input)
+        [ValidateAntiForgeryToken]
+        public async Task< IActionResult> Create(MassageViewModel input)
         {
             var user = await userManager.GetUserAsync(this.User);
-            if (this.ModelState.IsValid)
+            
+            if (!this.ModelState.IsValid)
             {
                 return this.View(input);
             }
 
-            var massageId = await massagesService.CreateAsync(input.Content, input.UserName, user.Id);
+            var massageId = await massagesService.CreateAsync(input.SanitizedContent, input.UserName, user.Id);
+
+            this.TempData["InfoMessage"] = "Forum post created!";
             
-            return this.View(input);
+            return this.RedirectToAction(nameof(this.All));
         }
 
     }
