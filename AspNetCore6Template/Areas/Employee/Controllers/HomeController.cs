@@ -28,9 +28,17 @@ namespace PlanB.Areas.Employee.Controllers
             return this.View();
         }
 
+        public IActionResult Chat()
+        {
+            var user = userManager.GetUserAsync(this.User).GetAwaiter().GetResult();
+            var view = usersService.GetT<ChatViewModel>(user.Id);
+            return View(view);
+        }
         public IActionResult All()
         {
-            var massage = this.massagesService.GetAll<MassageInfoViewModel>();
+            var user = userManager.GetUserAsync(this.User).GetAwaiter().GetResult();
+            
+            var massage = this.massagesService.GetAll<MassageInfoViewModel>(user.UserName);
             var model = new AllMassagesViewModel { Massages = massage, StatusMessage = "Your profile has been updated" };
             return this.View(model);
         }
@@ -53,7 +61,7 @@ namespace PlanB.Areas.Employee.Controllers
                 return this.View(input);
             }
 
-            var massageId = await massagesService.CreateAsync(input.SanitizedContent, input.UserName, user.Id);
+            var massageId = await massagesService.CreateAsync(input.Content, input.UserName, user.Id);
 
             this.TempData["InfoMessage"] = "Forum post created!";
             

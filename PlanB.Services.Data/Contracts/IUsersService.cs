@@ -17,5 +17,7 @@ namespace PlanB.Services.Data
         Task<EditUserViewModel> EditUser(string id);
 
         Task<ApplicationUser> GetCurrentUser();
+
+        T GetT<T>(string userId);
     }
 }

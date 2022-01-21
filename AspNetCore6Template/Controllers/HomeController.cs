@@ -5,6 +5,7 @@
     using PlanB.Web.ViewModels;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
 
     public class HomeController : BaseController
     {
@@ -14,6 +15,12 @@
         }
 
         public IActionResult Privacy()
+        {
+            return this.View();
+        }
+
+        [Authorize]
+        public IActionResult Chat()
         {
             return this.View();
         }

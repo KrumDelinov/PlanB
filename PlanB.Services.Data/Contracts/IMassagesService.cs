@@ -10,6 +10,6 @@ namespace PlanB.Services.Data.Contracts
     {
         Task<int> CreateAsync( string content, string userName, string userId);
 
-        IEnumerable<T> GetAll<T>();
+        IEnumerable<T> GetAll<T>(string userName);
     }
 }

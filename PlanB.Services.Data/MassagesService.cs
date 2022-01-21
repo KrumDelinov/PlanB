@@ -34,9 +34,9 @@ namespace PlanB.Services.Data
             return massage.Id;
         }
 
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetAll<T>(string userName)
         {
-            return this.massagesRepository.All().To<T>().ToList();
+            return this.massagesRepository.All().Where(n => n.UserName == userName).To<T>().ToList();
         }
     }
 }

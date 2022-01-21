@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using PlanB.Services.Data.Contracts;
+using PlanB.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,7 @@ builder.Services.AddRazorPages().AddRazorPagesOptions(option =>
     option.Conventions.AddAreaPageRoute("Identity","/Accaunt/Manage","Index/id?");
 });
 builder.Services.AddSingleton(builder.Configuration);
+builder.Services.AddSignalR();
 
 builder.Services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -92,6 +94,7 @@ app.MapRazorPages();
 app.UseEndpoints(
                 endpoints =>
                 {
+                    endpoints.MapHub<ChatHub>("/chat");
                     endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                     endpoints.MapRazorPages();

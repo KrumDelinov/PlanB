@@ -1,0 +1,41 @@
+﻿@using PlanB.Web.ViewModels.Employee.Home
+@model ChatViewModel
+<div class="container-fluid mt-100">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="media flex-wrap w-100 align-items-center">
+                        <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                        <div class="media-body ml-3">
+                            <h3 id="userInput">@Model.FullName</h3>
+
+                            <div class="text-muted small">
+                                <time>@DateTime.Now</time>
+                                @*<time datetime="@Model.CreatedOn.ToString("O")"></time>*@
+                            </div>
+                            <div class="row">
+                                <div class="col-2">Message</div>
+                                <div class="col-4"><textarea id="messageInput"></textarea></div>
+                            </div>
+                          
+                            <div class="row">&nbsp;</div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="button" id="sendButton" value="Send Message" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <article>
+                    <ul id="messagesList"></ul>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat2.js"></script>

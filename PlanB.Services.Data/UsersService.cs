@@ -72,6 +72,12 @@ namespace PlanB.Services.Data
             return await userManager.GetUserAsync(this.User);
         }
 
+        public T GetT<T>(string userId)
+        {
+            var user = usersRepository.All().Where(u => u.Id == userId).To<T>().FirstOrDefault();
+            return user;
+        }
+
         public async Task<IndexViewModel> GetUsersWithRolesAsync()
         {
 
