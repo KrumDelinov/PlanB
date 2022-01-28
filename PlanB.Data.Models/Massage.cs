@@ -13,7 +13,7 @@ namespace PlanB.Data.Models
         [MaxLength(300)]
         public string Content { get; set; }
 
-        [Required]
+        [Required]   
         public string UserName { get; set; }
 
         [Required]

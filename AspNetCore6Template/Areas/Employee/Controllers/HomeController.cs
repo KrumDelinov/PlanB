@@ -12,14 +12,17 @@ namespace PlanB.Areas.Employee.Controllers
     {
         private readonly IUsersService usersService;
         private readonly IMassagesService massagesService;
+        private readonly IRecipesService recipesService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public HomeController(IUsersService usersService,
             IMassagesService massagesService,
+            IRecipesService recipesService,
             UserManager<ApplicationUser> userManager)
         {
             this.usersService = usersService;
             this.massagesService = massagesService;
+            this.recipesService = recipesService;
             this.userManager = userManager;
         }
         public  IActionResult Index()
@@ -41,6 +44,18 @@ namespace PlanB.Areas.Employee.Controllers
             var massage = this.massagesService.GetAll<MassageInfoViewModel>(user.UserName);
             var model = new AllMassagesViewModel { Massages = massage, StatusMessage = "Your profile has been updated" };
             return this.View(model);
+        }
+        public IActionResult CreateRecipe()
+        {
+            
+
+            return View();
+        }
+        public IActionResult RecipeDetails()
+        {
+            
+
+            return View();
         }
 
         public async Task<IActionResult> CreateAsync()

@@ -51,6 +51,7 @@ builder.Services.AddTransient<ISettingsService, SettingsService>();
 builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IRolesService, RolesService>();
 builder.Services.AddTransient<IMassagesService, MassagesService>();
+builder.Services.AddTransient<IRecipesService, RecipesService>();
 
 var app = builder.Build();
 
@@ -59,6 +60,8 @@ AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly)
 using (var serviceScope = app.Services.CreateScope())
 {
     var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    //dbContext.Database.EnsureDeleted();
+    //dbContext.Database.EnsureCreated();
     dbContext.Database.Migrate();
 
     var services = serviceScope.ServiceProvider;

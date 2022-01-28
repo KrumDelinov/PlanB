@@ -23,10 +23,19 @@
             : base(options)
         {
         }
+       
 
         public DbSet<Setting> Settings { get; set; }
 
         public DbSet<Massage> Massages { get; set; }
+
+        public DbSet<Recipe> Recipes { get; set; }  
+
+        public DbSet<RecipesIngradients> RecipesIngradients { get; set; }
+
+        public DbSet<Ingradient> Ingredients { get; set; }
+
+        public DbSet<Tank> Tanks { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -51,6 +60,7 @@
         {
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
+            builder.Entity<RecipesIngradients>().HasKey(sc => new { sc.RecipeId, sc.IngradientId });
 
             this.ConfigureUserIdentityRelations(builder);
 

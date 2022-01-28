@@ -256,6 +256,40 @@ namespace PlanB.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("PlanB.Data.Models.Ingradient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Product")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Ingredients");
+                });
+
             modelBuilder.Entity("PlanB.Data.Models.Massage", b =>
                 {
                     b.Property<int>("Id")
@@ -298,6 +332,52 @@ namespace PlanB.Data.Migrations
                     b.ToTable("Massages");
                 });
 
+            modelBuilder.Entity("PlanB.Data.Models.Recipe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("PlanB.Data.Models.RecipesIngradients", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IngradientId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecipeId", "IngradientId");
+
+                    b.HasIndex("IngradientId");
+
+                    b.ToTable("RecipesIngradients");
+                });
+
             modelBuilder.Entity("PlanB.Data.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -331,6 +411,40 @@ namespace PlanB.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("PlanB.Data.Models.Tank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Tanks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -395,6 +509,25 @@ namespace PlanB.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("PlanB.Data.Models.RecipesIngradients", b =>
+                {
+                    b.HasOne("PlanB.Data.Models.Ingradient", "Ingradient")
+                        .WithMany("RecipesIngradients")
+                        .HasForeignKey("IngradientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PlanB.Data.Models.Recipe", "Recipe")
+                        .WithMany("RecipesIngradients")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Ingradient");
+
+                    b.Navigation("Recipe");
+                });
+
             modelBuilder.Entity("PlanB.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
@@ -404,6 +537,16 @@ namespace PlanB.Data.Migrations
                     b.Navigation("Massages");
 
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("PlanB.Data.Models.Ingradient", b =>
+                {
+                    b.Navigation("RecipesIngradients");
+                });
+
+            modelBuilder.Entity("PlanB.Data.Models.Recipe", b =>
+                {
+                    b.Navigation("RecipesIngradients");
                 });
 #pragma warning restore 612, 618
         }
