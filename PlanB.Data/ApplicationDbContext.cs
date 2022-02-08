@@ -37,6 +37,8 @@
 
         public DbSet<Tank> Tanks { get; set; }
 
+        public DbSet<Batch>  Batches { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

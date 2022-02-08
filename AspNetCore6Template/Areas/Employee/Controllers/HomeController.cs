@@ -4,6 +4,7 @@ using PlanB.Data.Models;
 using PlanB.Services.Data;
 using PlanB.Services.Data.Contracts;
 using PlanB.Web.ViewModels.Employee.Home;
+using PlanB.Web.ViewModels.Employee.Tanks;
 using System.Security.Claims;
 
 namespace PlanB.Areas.Employee.Controllers
@@ -27,8 +28,17 @@ namespace PlanB.Areas.Employee.Controllers
         }
         public  IActionResult Index()
         {
+            
 
             return this.View();
+        }
+        
+        public IActionResult Tank()
+        {
+            var view = new TankViewModel { Name = "Oak", Amount = 1000 };
+
+            return PartialView("_TanksPartial", view);
+            //return this.View(view);
         }
 
         public IActionResult Chat()
