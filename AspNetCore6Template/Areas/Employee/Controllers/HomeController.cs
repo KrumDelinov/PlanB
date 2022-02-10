@@ -58,13 +58,11 @@ namespace PlanB.Areas.Employee.Controllers
         public IActionResult CreateRecipe()
         {
             
-
             return View();
         }
         public IActionResult RecipeDetails()
         {
             
-
             return View();
         }
 
