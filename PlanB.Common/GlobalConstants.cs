@@ -9,7 +9,7 @@
         public const string EmploeeRoleName = "Employee";
         public const string AddRole = "Add to role";
         public const string RemoveFromRole = "Remove from role";
-        public const string BigCup = "Big Cup";
-        public const string SmallCup = "Small Cup";
+        public const string BigCup = "BigCup";
+        public const string SmallCup = "SmallCup";
     }
 }

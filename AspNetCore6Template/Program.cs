@@ -52,6 +52,8 @@ builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IRolesService, RolesService>();
 builder.Services.AddTransient<IMassagesService, MassagesService>();
 builder.Services.AddTransient<IRecipesService, RecipesService>();
+builder.Services.AddTransient<IBatchesService, BatchesService>();
+builder.Services.AddTransient<ITanksServise, TanksServise>();
 
 var app = builder.Build();
 

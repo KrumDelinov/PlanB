@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PlanB.Data;
 using PlanB.Data.Models;
-using PlanB.Web.ViewModels.Employee.Batch;
 using PlanB.Common;
+using PlanB.Web.ViewModels.Employee.Batches;
+using PlanB.Services.Data.Contracts;
 
 namespace PlanB.Areas.Employee.Controllers
 {
@@ -19,11 +20,16 @@ namespace PlanB.Areas.Employee.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ITanksServise tanksServise;
 
-        public BatchesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public BatchesController(
+            ApplicationDbContext context, 
+            UserManager<ApplicationUser> userManager,
+            ITanksServise tanksServise)
         {
             _context = context;
             this.userManager = userManager;
+            this.tanksServise = tanksServise;
         }
 
         // GET: Employee/Batches
@@ -50,6 +56,16 @@ namespace PlanB.Areas.Employee.Controllers
             }
 
             return View(batch);
+        }
+
+        public async Task<IActionResult> CreateBigCup()
+        {
+            var user = await userManager.GetUserAsync(User);
+            var batch = new Batch { Type = GlobalConstants.BigCup, UserId = user.Id };
+            await tanksServise.UpdateTanksAsync(batch.Type);
+            _context.Add(batch);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index","Home");
         }
 
         // GET: Employee/Batches/Create

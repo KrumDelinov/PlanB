@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlanB.Data.Models;
 using PlanB.Services.Data;
 using PlanB.Services.Data.Contracts;
+using PlanB.Web.ViewModels.Employee.Batches;
 using PlanB.Web.ViewModels.Employee.Home;
 using PlanB.Web.ViewModels.Employee.Tanks;
 using System.Security.Claims;
@@ -14,23 +15,27 @@ namespace PlanB.Areas.Employee.Controllers
         private readonly IUsersService usersService;
         private readonly IMassagesService massagesService;
         private readonly IRecipesService recipesService;
+        private readonly IBatchesService batchService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public HomeController(IUsersService usersService,
             IMassagesService massagesService,
             IRecipesService recipesService,
+            IBatchesService batchService,
             UserManager<ApplicationUser> userManager)
         {
             this.usersService = usersService;
             this.massagesService = massagesService;
             this.recipesService = recipesService;
+            this.batchService = batchService;
             this.userManager = userManager;
         }
         public  IActionResult Index()
         {
-            
+            var batches = batchService.GetAll<BatchViewModel>();
+            var view = new BatchesListViewModel { Batches = batches };
 
-            return this.View();
+            return this.View(view);
         }
         
         public IActionResult Tank()

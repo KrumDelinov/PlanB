@@ -1,6 +1,8 @@
-﻿using PlanB.Data.Common.Repositories;
+﻿using PlanB.Data;
+using PlanB.Data.Common.Repositories;
 using PlanB.Data.Models;
 using PlanB.Services.Data.Contracts;
+using PlanB.Services.Mapping;
 using PlanB.Web.ViewModels.Employee.Recipe;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,12 @@ namespace PlanB.Services.Data
     public class RecipesService : IRecipesService
     {
         private readonly IDeletableEntityRepository<Recipe> recipeRepository;
+        private readonly ApplicationDbContext dbContext;
 
-        public RecipesService(IDeletableEntityRepository<Recipe> recipeRepository)
+        public RecipesService(IDeletableEntityRepository<Recipe> recipeRepository, ApplicationDbContext dbContext)
         {
             this.recipeRepository = recipeRepository;
+            this.dbContext = dbContext;
         }
 
 
@@ -40,6 +44,16 @@ namespace PlanB.Services.Data
 
             var viewModel = new RecipeDetailsViewModel { Name = recipe.Name, Ingradients = ingradients };
             return viewModel;
+        }
+
+        public Recipe GetRecipe(string name)
+        {
+            return dbContext.Recipes.Where(n => n.Name == name).FirstOrDefault();
+        }
+
+        public T GetT<T>(string name)
+        {
+            return recipeRepository.All().Where(n => n.Name == name).To<T>().FirstOrDefault();
         }
     }
 }

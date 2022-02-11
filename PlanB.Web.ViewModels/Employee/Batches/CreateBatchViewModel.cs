@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlanB.Web.ViewModels.Employee.Batch
+namespace PlanB.Web.ViewModels.Employee.Batches
 {
     public class CreateBatchViewModel
     {

@@ -1,4 +1,5 @@
-﻿using PlanB.Web.ViewModels.Employee.Recipe;
+﻿using PlanB.Data.Models;
+using PlanB.Web.ViewModels.Employee.Recipe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,9 @@ namespace PlanB.Services.Data.Contracts
         void CreateRecipe();
 
         RecipeDetailsViewModel Details();
+
+        T GetT<T>(string name);
+
+        Recipe GetRecipe(string name);
     }
 }
