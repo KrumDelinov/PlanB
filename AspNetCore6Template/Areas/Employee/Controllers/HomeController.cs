@@ -37,7 +37,16 @@ namespace PlanB.Areas.Employee.Controllers
 
             return this.View(view);
         }
-        
+
+        public IActionResult ChartReport()
+        {
+            return this.View();
+        }
+        public ActionResult Column()
+        {
+            return View();
+        }
+
         public IActionResult Tank()
         {
             var view = new TankViewModel { Name = "Oak", Amount = 1000 };

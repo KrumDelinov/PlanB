@@ -19,6 +19,12 @@
     <li class="nav-item">
         <a asp-action="Chat">Chat</a>
     </li>
+    <li class="nav-item">
+        <a asp-action="ChartReport">Report</a>
+    </li>
+     <li class="nav-item">
+        <a asp-action="Column">Kendo</a>
+    </li>
 
     @if (this.User.IsInRole(GlobalConstants.ManagerRoleName))
     {
@@ -31,6 +37,7 @@
         <li class="nav-item">
             <a asp-area="Manager" asp-controller="Tanks" asp-action="Index">Tanks</a>
         </li>
+
     }
 </ul>
 
@@ -63,9 +70,9 @@
             <div class="card-header py-3">
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h6 class="m-0 font-weight-bold text-primary">All Batches</h6>
-                    <a asp-controller="Batches" asp-action="CreateBigCup"  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> New Batch</a>
+                    <a asp-controller="Batches" asp-action="CreateBigCup" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> New Batch</a>
                 </div>
-                
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -79,23 +86,23 @@
                         </thead>
                         <tfoot>
                             <tr>
-                               <th>Name</th>
+                                <th>Name</th>
                                 <th>Type</th>
                                 <th>Start date</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                         
-                          @foreach (var batch in Model.Batches)
-                          {
+
+                            @foreach (var batch in Model.Batches)
+                            {
                                 <tr>
-                                <td>@batch.FullName</td>
-                                <td>@batch.Type</td>
-                                <td>@batch.Hour</td>
-                            </tr>
-                          }
-                       
-                         
+                                    <td>@batch.FullName</td>
+                                    <td>@batch.Type</td>
+                                    <td>@batch.Hour</td>
+                                </tr>
+                            }
+
+
                         </tbody>
                     </table>
                 </div>

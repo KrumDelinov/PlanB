@@ -33,9 +33,10 @@
                             <div id=23 class="h5 mb-0 font-weight-bold text-gray-800">@Math.Round(tank.Amount, 2) kg.</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                         </div>
                     </div>
+                    <a asp-area="Manager" asp-controller="Tanks" asp-action="Edit" asp-route-id="@tank.Id">Fill Tank</a> |
                 </div>
             </div>
         </div>
