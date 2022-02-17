@@ -1,4 +1,6 @@
-﻿@{
+﻿@using PlanB.Web.ViewModels.Employee.Batches
+@model WeekBatchesViewModel
+@{
     var data = new int[] { 1, 15, 5, 6, 7, 12, 21 };
 }
 <div class="card shadow mb-4">
@@ -55,13 +57,13 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Area Chart Example
-  var stringArray = @Html.Raw(Json.Serialize(data));
- console.log(stringArray);
+var weekDayArray = @Html.Raw(Json.Serialize(Model.WeekDays));
+ var dataArray = @Html.Raw(Json.Serialize(Model.BatchCounts));
 var ctx1 = document.getElementById("myAreaChart1");
 var myLineChart1 = new Chart(ctx1, {
   type: 'line',
   data: {
-    labels: ["Mon", "Tues", "Thirdt", "Wnsde", "May", "Sat", "Sun"],
+    labels: weekDayArray,
     datasets: [{
       label: "Batches1 ",
       lineTension: 0.3,
@@ -75,7 +77,7 @@ var myLineChart1 = new Chart(ctx1, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: stringArray,
+      data: dataArray,
     }],
   },
   options: {

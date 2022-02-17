@@ -23,5 +23,17 @@ namespace PlanB.Services.Data
         {
             return this.batchesRepository.All().To<T>().ToList();
         }
+
+        public IEnumerable<T> GetAllDalyBatches<T>(DateTime dateTime)
+        {
+            var result = this.batchesRepository.All().Where(d => d.CreatedOn.Date == dateTime.Date).To<T>().ToList();
+
+            return result;
+        }
+
+        public  IEnumerable<DateTime> Range( DateTime startDate, DateTime endDate)
+        {
+            return Enumerable.Range(0, (endDate - startDate).Days + 1).Select(d => startDate.AddDays(d));
+        }
     }
 }

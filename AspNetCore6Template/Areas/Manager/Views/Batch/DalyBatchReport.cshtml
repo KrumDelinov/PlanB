@@ -1,0 +1,41 @@
+﻿@using PlanB.Web.ViewModels.Employee.Batches
+@model BatchesListViewModel
+@{
+    ViewData["Title"] = "Daly";
+
+
+}
+
+  <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Start date</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Start date</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+
+                @foreach (var batch in Model.Batches)
+                {
+                                    <tr>
+                                        <td>@batch.FullName</td>
+                                        <td>@batch.Type</td>
+                                        <td>@batch.Hour</td>
+                                    </tr>
+                }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>

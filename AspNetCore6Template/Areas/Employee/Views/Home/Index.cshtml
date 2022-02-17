@@ -22,9 +22,7 @@
     <li class="nav-item">
         <a asp-action="ChartReport">Report</a>
     </li>
-     <li class="nav-item">
-        <a asp-action="Column">Kendo</a>
-    </li>
+
 
     @if (this.User.IsInRole(GlobalConstants.ManagerRoleName))
     {
@@ -37,7 +35,15 @@
         <li class="nav-item">
             <a asp-area="Manager" asp-controller="Tanks" asp-action="Index">Tanks</a>
         </li>
-
+        <li class="nav-item">
+           <a asp-area="Manager" asp-controller="Home"  asp-action="Reports">Week Report</a>
+        </li>
+         <li class="nav-item">
+           <a asp-area="Manager" asp-controller="Home"  asp-action="Date">Report</a>
+        </li>
+         <li class="nav-item">
+           <a asp-area="Manager" asp-controller="Batch"  asp-action="DalyBatch">DalyReport</a>
+        </li>
     }
 </ul>
 
