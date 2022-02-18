@@ -1,8 +1,7 @@
 ﻿namespace PlanB.Data.Common.Repositories
 {
-    using System.Linq;
-
     using PlanB.Data.Common.Models;
+    using System.Linq;
 
     public interface IDeletableEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDeletableEntity

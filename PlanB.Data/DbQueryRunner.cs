@@ -1,11 +1,9 @@
 ﻿namespace PlanB.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using PlanB.Data.Common;
     using System;
     using System.Threading.Tasks;
-
-    using PlanB.Data.Common;
-
-    using Microsoft.EntityFrameworkCore;
 
     public class DbQueryRunner : IDbQueryRunner
     {

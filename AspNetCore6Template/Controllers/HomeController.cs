@@ -1,11 +1,9 @@
 ﻿namespace PlanB.Web.Controllers
 {
-    using System.Diagnostics;
-
-    using PlanB.Web.ViewModels;
-
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using PlanB.Web.ViewModels;
+    using System.Diagnostics;
 
     public class HomeController : BaseController
     {

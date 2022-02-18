@@ -1,14 +1,12 @@
 ﻿namespace PlanB.Web.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Mvc;
     using PlanB.Data.Common.Repositories;
     using PlanB.Data.Models;
     using PlanB.Services.Data;
     using PlanB.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Threading.Tasks;
 
     public class SettingsController : BaseController
     {

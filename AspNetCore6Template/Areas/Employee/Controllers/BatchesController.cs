@@ -1,17 +1,13 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PlanB.Common;
 using PlanB.Data;
 using PlanB.Data.Models;
-using PlanB.Common;
-using PlanB.Web.ViewModels.Employee.Batches;
 using PlanB.Services.Data.Contracts;
+using PlanB.Web.ViewModels.Employee.Batches;
 
 namespace PlanB.Areas.Employee.Controllers
 {
@@ -23,7 +19,7 @@ namespace PlanB.Areas.Employee.Controllers
         private readonly ITanksServise tanksServise;
 
         public BatchesController(
-            ApplicationDbContext context, 
+            ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             ITanksServise tanksServise)
         {
@@ -65,13 +61,23 @@ namespace PlanB.Areas.Employee.Controllers
             await tanksServise.UpdateTanksAsync(batch.Type);
             _context.Add(batch);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> CreateSmallCup()
+        {
+            var user = await userManager.GetUserAsync(User);
+            var batch = new Batch { Type = GlobalConstants.SmallCup, UserId = user.Id };
+            await tanksServise.UpdateTanksAsync(batch.Type);
+            _context.Add(batch);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Employee/Batches/Create
         public IActionResult Create()
         {
-            var test = new List<string> { GlobalConstants.BigCup, GlobalConstants.SmallCup};
+            var test = new List<string> { GlobalConstants.BigCup, GlobalConstants.SmallCup };
             ViewData["Type"] = new SelectList(test);
             return View();
         }

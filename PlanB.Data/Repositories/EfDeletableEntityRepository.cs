@@ -1,12 +1,10 @@
 ﻿namespace PlanB.Data.Repositories
 {
-    using System;
-    using System.Linq;
-
+    using Microsoft.EntityFrameworkCore;
     using PlanB.Data.Common.Models;
     using PlanB.Data.Common.Repositories;
-
-    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Linq;
 
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>
         where TEntity : class, IDeletableEntity

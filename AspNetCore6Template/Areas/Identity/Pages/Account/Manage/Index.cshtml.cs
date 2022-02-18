@@ -1,15 +1,12 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
-using PlanB.Common;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PlanB.Common;
 using PlanB.Data.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PlanB.Areas.Identity.Pages.Account.Manage
 {
@@ -89,7 +86,7 @@ namespace PlanB.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var userRolles = await _userManager.GetRolesAsync(user);
             var isAdmin = await _userManager.IsInRoleAsync(user, GlobalConstants.AdministratorRoleName);
-            var roles =  _roleManager.Roles.Select(n => n.Name).ToList();
+            var roles = _roleManager.Roles.Select(n => n.Name).ToList();
             Username = userName;
 
             Input = new InputModel
@@ -103,7 +100,7 @@ namespace PlanB.Areas.Identity.Pages.Account.Manage
             };
         }
 
-  
+
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -112,7 +109,7 @@ namespace PlanB.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-        
+
             await LoadAsync(user);
             return Page();
         }
@@ -151,7 +148,7 @@ namespace PlanB.Areas.Identity.Pages.Account.Manage
                 user.LastName = Input.LastName;
             }
 
-          
+
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
@@ -159,6 +156,6 @@ namespace PlanB.Areas.Identity.Pages.Account.Manage
             return RedirectToPage();
         }
 
-       
+
     }
 }

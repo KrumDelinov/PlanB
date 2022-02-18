@@ -4,11 +4,6 @@ using PlanB.Data.Models;
 using PlanB.Services.Data.Contracts;
 using PlanB.Services.Mapping;
 using PlanB.Web.ViewModels.Employee.Recipe;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanB.Services.Data
 {
@@ -24,7 +19,7 @@ namespace PlanB.Services.Data
         }
 
 
-        public void CreateRecipe() 
+        public void CreateRecipe()
         {
             string name = "BigCup";
             var ingredients = new Dictionary<string, decimal>();
@@ -40,7 +35,7 @@ namespace PlanB.Services.Data
             var recipe = recipeRepository.All().Where(x => x.Id == 2).FirstOrDefault();
 
             var ingradients = new List<IngradientViewModel>();
-         
+
 
             var viewModel = new RecipeDetailsViewModel { Name = recipe.Name, Ingradients = ingradients };
             return viewModel;

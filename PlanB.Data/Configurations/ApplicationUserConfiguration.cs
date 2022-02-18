@@ -1,8 +1,8 @@
 ﻿namespace PlanB.Data.Configurations
 {
-    using PlanB.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using PlanB.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

@@ -1,19 +1,17 @@
-﻿using PlanB.Data;
-
-namespace PlanB.Data.Seeding
+﻿namespace PlanB.Data.Seeding
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public class ApplicationDbContextSeeder : ISeeder
     {
-        public async Task SeedAsync (IServiceProvider serviceProvider)
+        public async Task SeedAsync(IServiceProvider serviceProvider)
         {
-         
+
 
             using (var context = new ApplicationDbContext(
             serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))

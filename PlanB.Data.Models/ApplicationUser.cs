@@ -1,11 +1,10 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
 namespace PlanB.Data.Models
 {
+    using Microsoft.AspNetCore.Identity;
+    using PlanB.Data.Common.Models;
     using System;
     using System.Collections.Generic;
-
-    using PlanB.Data.Common.Models;
-    using Microsoft.AspNetCore.Identity;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -33,7 +32,7 @@ namespace PlanB.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
-        public virtual  ICollection<IdentityUserRole<string>> Roles { get; set; }
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 

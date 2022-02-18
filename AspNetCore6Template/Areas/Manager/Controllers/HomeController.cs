@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PlanB.Common;
 using PlanB.Services.Data.Contracts;
 using PlanB.Web.ViewModels.Employee.Batches;
 
@@ -16,46 +17,36 @@ namespace PlanB.Areas.Manager.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult Date(BatchDateViewModel batchDate)
-        {
-
-            var test = batchDate.StartDade;
-
-            var dateRange = batchesService.Range(batchDate.StartDade, batchDate.EndDate);
-            //
-
-            var test2 = new int[] { 23, 12, 13, 14, 15, 12, 5};
-            var view = new WeekBatchesViewModel
-            {
-                BatchCounts = test2
-            };
-            return RedirectToAction(nameof(Reports), view);
-        }
+  
 
         public IActionResult Reports(BatchDateViewModel batchDate)
         {
             var weekDaysList = new List<string>();
-            var batchesCountList = new List<int>();
+            var bigBatchesCountList = new List<int>();
+            var smallBatchesCountList = new List<int>();
 
             var dateRange = batchesService.Range(batchDate.StartDade, batchDate.EndDate);
             //
-            
+
             foreach (var day in dateRange)
             {
                 var weekDay = day.DayOfWeek.ToString();
-                var batches = batchesService.GetAllDalyBatches<BatchViewModel>(day.Date);
-                var batchCount = batches.Count();
+                var bigBatches = batchesService.GetAllDalyBatches<BatchViewModel>(day.Date, GlobalConstants.BigCup);
+                var smallBatches = batchesService.GetAllDalyBatches<BatchViewModel>(day.Date, GlobalConstants.SmallCup);
+                var bigBatchCount = bigBatches.Count();
+                var smallBatchCount = smallBatches.Count();
                 weekDaysList.Add(weekDay);
-                batchesCountList.Add(batchCount);
+                bigBatchesCountList.Add(bigBatchCount);
+                smallBatchesCountList.Add(smallBatchCount);
 
             }
 
             var weekDaysArray = weekDaysList.ToArray();
-            var batchCounts = batchesCountList.ToArray();
+            var batchCounts = bigBatchesCountList.ToArray();
             var view = new WeekBatchesViewModel
             {
-                BatchCounts = batchCounts,
+                BigBatchCounts = bigBatchesCountList.ToArray(),
+                SmallBatchesCount = smallBatchesCountList.ToArray(),
                 WeekDays = weekDaysArray
             };
 

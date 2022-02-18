@@ -1,19 +1,17 @@
 ﻿namespace PlanB.Data.Seeding
 {
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using PlanB.Common;
+    using PlanB.Data.Models;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using PlanB.Common;
-    using PlanB.Data.Models;
-
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.EntityFrameworkCore;
-
     internal class RolesSeeder : ISeeder
     {
-    
+
         public async Task SeedAsync(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();

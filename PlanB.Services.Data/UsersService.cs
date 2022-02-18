@@ -4,13 +4,7 @@ using PlanB.Data.Common.Repositories;
 using PlanB.Data.Models;
 using PlanB.Services.Mapping;
 using PlanB.Web.ViewModels.Administration.Dashboard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 
 namespace PlanB.Services.Data
 {

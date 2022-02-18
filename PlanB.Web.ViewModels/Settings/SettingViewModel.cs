@@ -1,9 +1,8 @@
 ﻿namespace PlanB.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using PlanB.Data.Models;
     using PlanB.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

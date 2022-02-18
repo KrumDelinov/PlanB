@@ -1,10 +1,8 @@
 ﻿namespace PlanB.Data
 {
-    using System.Linq;
-
-    using PlanB.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using PlanB.Data.Common.Models;
+    using System.Linq;
 
     internal static class EntityIndexesConfiguration
     {

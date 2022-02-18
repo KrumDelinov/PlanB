@@ -1,13 +1,12 @@
 ﻿namespace PlanB.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using PlanB.Common;
+    using PlanB.Data;
+    using PlanB.Data.Models;
     using PlanB.Services.Data;
     using PlanB.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
-    using PlanB.Data;
-    using Microsoft.AspNetCore.Identity;
-    using PlanB.Data.Models;
-    using PlanB.Common;
 
     public class DashboardController : AdministrationController
     {
@@ -32,15 +31,17 @@
 
         public string StatusMessage { get; set; }
 
-        public async Task< IActionResult> Index()
+      
+
+        public async Task<IActionResult> Users()
         {
-            
+
             var model = await this.usersService.GetUsersWithRolesAsync();
             return this.View(model);
         }
 
         public async Task<IActionResult> EditAsync(string id)
-        { 
+        {
             var viewModel = await usersService.EditUser(id);
             return this.View(viewModel);
         }
@@ -56,7 +57,7 @@
 
             if (ModelState.IsValid)
             {
-                
+
                 return this.View(view);
             }
 
@@ -89,9 +90,9 @@
             {
                 var result = await userManager.RemoveFromRoleAsync(user, removeRoleName);
             }
-            
-            
-            
+
+
+
             await userManager.UpdateAsync(user);
 
 

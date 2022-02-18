@@ -1,10 +1,9 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
 namespace PlanB.Data.Models
 {
-    using System;
-
-    using PlanB.Data.Common.Models;
     using Microsoft.AspNetCore.Identity;
+    using PlanB.Data.Common.Models;
+    using System;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

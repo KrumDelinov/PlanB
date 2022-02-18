@@ -1,10 +1,9 @@
 ﻿namespace PlanB.Data
 {
-    using System.IO;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.Extensions.Configuration;
+    using System.IO;
 
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {

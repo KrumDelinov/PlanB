@@ -1,11 +1,5 @@
-﻿using AutoMapper;
-using PlanB.Data.Models;
+﻿using PlanB.Data.Models;
 using PlanB.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanB.Web.ViewModels.Employee.Batches
 {
@@ -23,7 +17,7 @@ namespace PlanB.Web.ViewModels.Employee.Batches
 
         public string Hour => this.CreatedOn.ToString("MM/dd/yyyy HH:mm");
 
-        public string Date  => this.CreatedOn.ToShortDateString();
+        public string Date => this.CreatedOn.ToShortDateString();
 
 
     }

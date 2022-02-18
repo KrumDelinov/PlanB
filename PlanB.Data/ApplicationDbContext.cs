@@ -1,16 +1,14 @@
 ﻿namespace PlanB.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using PlanB.Data.Common.Models;
+    using PlanB.Data.Models;
     using System;
     using System.Linq;
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
-
-    using PlanB.Data.Common.Models;
-    using PlanB.Data.Models;
-
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -23,13 +21,13 @@
             : base(options)
         {
         }
-       
+
 
         public DbSet<Setting> Settings { get; set; }
 
         public DbSet<Massage> Massages { get; set; }
 
-        public DbSet<Recipe> Recipes { get; set; }  
+        public DbSet<Recipe> Recipes { get; set; }
 
         public DbSet<RecipesIngradients> RecipesIngradients { get; set; }
 
@@ -37,7 +35,7 @@
 
         public DbSet<Tank> Tanks { get; set; }
 
-        public DbSet<Batch>  Batches { get; set; }
+        public DbSet<Batch> Batches { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

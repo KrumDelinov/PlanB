@@ -2,11 +2,6 @@
 using PlanB.Data.Models;
 using PlanB.Services.Data.Contracts;
 using PlanB.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanB.Services.Data
 {
@@ -24,14 +19,14 @@ namespace PlanB.Services.Data
             return this.batchesRepository.All().To<T>().ToList();
         }
 
-        public IEnumerable<T> GetAllDalyBatches<T>(DateTime dateTime)
+        public IEnumerable<T> GetAllDalyBatches<T>(DateTime dateTime, string batchSize)
         {
-            var result = this.batchesRepository.All().Where(d => d.CreatedOn.Date == dateTime.Date).To<T>().ToList();
+            var result = this.batchesRepository.All().Where(d => d.CreatedOn.Date == dateTime.Date & d.Type == batchSize).To<T>().ToList();
 
             return result;
         }
 
-        public  IEnumerable<DateTime> Range( DateTime startDate, DateTime endDate)
+        public IEnumerable<DateTime> Range(DateTime startDate, DateTime endDate)
         {
             return Enumerable.Range(0, (endDate - startDate).Days + 1).Select(d => startDate.AddDays(d));
         }

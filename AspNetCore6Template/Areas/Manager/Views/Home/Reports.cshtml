@@ -58,14 +58,15 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Area Chart Example
 var weekDayArray = @Html.Raw(Json.Serialize(Model.WeekDays));
- var dataArray = @Html.Raw(Json.Serialize(Model.BatchCounts));
+var bigBatchdataArray = @Html.Raw(Json.Serialize(Model.BigBatchCounts));
+var smallBatchdataArray = @Html.Raw(Json.Serialize(Model.SmallBatchesCount));
 var ctx1 = document.getElementById("myAreaChart1");
 var myLineChart1 = new Chart(ctx1, {
   type: 'line',
   data: {
     labels: weekDayArray,
     datasets: [{
-      label: "Batches1 ",
+      label: "Big Batch ",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 20, 223, 0.1)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -77,7 +78,7 @@ var myLineChart1 = new Chart(ctx1, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: dataArray,
+      data: bigBatchdataArray,
     }],
   },
   options: {
@@ -151,9 +152,9 @@ var ctx2 = document.getElementById("myAreaChart2");
 var myLineChart2 = new Chart(ctx2, {
   type: 'line',
   data: {
-    labels: ["Mon", "Tues", "Thirdt", "Wnsde", "May", "Sat", "Sun"],
+    labels: weekDayArray,
     datasets: [{
-      label: "Batches2 ",
+      label: "Small Batches ",
       lineTension: 0.5,
       backgroundColor: "rgba(78, 255, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -165,7 +166,7 @@ var myLineChart2 = new Chart(ctx2, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [12, 5, 5, 5, 3, 20, 0],
+      data: smallBatchdataArray,
     }],
   },
   options: {

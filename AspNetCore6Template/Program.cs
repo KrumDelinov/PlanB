@@ -1,20 +1,18 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PlanB.Data;
 using PlanB.Data.Common;
 using PlanB.Data.Common.Repositories;
 using PlanB.Data.Models;
 using PlanB.Data.Repositories;
 using PlanB.Data.Seeding;
+using PlanB.Hubs;
 using PlanB.Services.Data;
+using PlanB.Services.Data.Contracts;
 using PlanB.Services.Mapping;
 using PlanB.Services.Messaging;
 using PlanB.Web.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using PlanB.Services.Data.Contracts;
-using PlanB.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +35,7 @@ builder.Services.AddControllersWithViews(
 
 builder.Services.AddRazorPages().AddRazorPagesOptions(option =>
 {
-    option.Conventions.AddAreaPageRoute("Identity","/Accaunt/Manage","Index/id?");
+    option.Conventions.AddAreaPageRoute("Identity", "/Accaunt/Manage", "Index/id?");
 });
 builder.Services.AddSingleton(builder.Configuration);
 builder.Services.AddSignalR();

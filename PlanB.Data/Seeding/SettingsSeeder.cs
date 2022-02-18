@@ -1,11 +1,11 @@
 ﻿namespace PlanB.Data.Seeding
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using PlanB.Data.Models;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     internal class SettingsSeeder : ISeeder
     {

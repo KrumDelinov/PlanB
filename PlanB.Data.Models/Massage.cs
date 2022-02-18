@@ -1,10 +1,5 @@
 ﻿using PlanB.Data.Common.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlanB.Data.Models
 {
@@ -13,7 +8,7 @@ namespace PlanB.Data.Models
         [MaxLength(300)]
         public string Content { get; set; }
 
-        [Required]   
+        [Required]
         public string UserName { get; set; }
 
         [Required]

@@ -2,7 +2,7 @@
 
 namespace PlanB.Data.Models
 {
-    public class Batch :BaseDeletableModel<int>
+    public class Batch : BaseDeletableModel<int>
     {
         public string Type { get; set; }
 
