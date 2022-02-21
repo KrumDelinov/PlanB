@@ -31,7 +31,7 @@ namespace PlanB.Areas.Employee.Controllers
         }
         public IActionResult Index()
         {
-            var batches = batchService.GetAll<BatchViewModel>();
+            var batches = batchService.GetAllTodayBatches<BatchViewModel>();
             var view = new BatchesListViewModel { Batches = batches };
 
             return this.View(view);

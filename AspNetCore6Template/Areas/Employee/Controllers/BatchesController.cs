@@ -17,22 +17,27 @@ namespace PlanB.Areas.Employee.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ITanksServise tanksServise;
+        private readonly IBatchesService batchesService;
 
         public BatchesController(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
-            ITanksServise tanksServise)
+            ITanksServise tanksServise,
+            IBatchesService batchesService)
         {
             _context = context;
             this.userManager = userManager;
             this.tanksServise = tanksServise;
+            this.batchesService = batchesService;
         }
 
         // GET: Employee/Batches
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _context.Batches.Include(b => b.User);
-            return View(await applicationDbContext.ToListAsync());
+            var batches = batchesService.GetAll<BatchViewModel>();
+            var view = new BatchesListViewModel { Batches = batches };
+
+            return this.View(view);
         }
 
         // GET: Employee/Batches/Details/5

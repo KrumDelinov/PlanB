@@ -10,30 +10,36 @@
     <div class="col-md-6">
         <form asp-action="Edit" id="profile-form" method="post">
             <input  asp-for=@Model.Id />
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
                 <input asp-for=@Model.UserName class="form-control" />
                 <label asp-for="@Model.UserName" class="form-label"></label>
             </div>
+            <hr />
             <div class="form-floating">
                 <input asp-for=@Model.FirstName class="form-control" />
                 <label asp-for=@Model.FirstName class="form-label"></label>
                 <span asp-validation-for=@Model.FirstName class="text-danger"></span>
             </div>
+            <hr />
             <div class="form-floating">
                 <input asp-for=@Model.LastName class="form-control" />
                 <label asp-for=@Model.LastName class="form-label"></label>
                 <span asp-validation-for=@Model.LastName class="text-danger"></span>
             </div>
+            <hr />
             <div class="form-floating">
                 <input asp-for=@Model.PhoneNumber class="form-control" />
                 <label asp-for=@Model.PhoneNumber></label>
                 <span asp-validation-for=@Model.PhoneNumber class="text-danger"></span>
             </div>
+            <hr />
             <div class="form-floating">
                 <input asp-for=@Model.UserRolles class="form-control" />
                 <label asp-for=@Model.UserRolles class="form-label"></label>
             </div>
+            <hr />
             <div title="Asd">
                 
                 <select class="form-select was-validated" name="AddRole" aria-label="Default select example">
@@ -44,6 +50,7 @@
                     }
                 </select>
             </div>
+            <hr />
              <div title="Asd2">
                 
                 <select class="form-select was-validated" name="RemoveRole" aria-label="Default select example">
@@ -54,8 +61,7 @@
                     }
                 </select>
             </div>
-           
-
+           <hr />
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>
