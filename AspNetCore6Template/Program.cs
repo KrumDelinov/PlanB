@@ -13,6 +13,7 @@ using PlanB.Services.Mapping;
 using PlanB.Services.Messaging;
 using PlanB.Web.ViewModels;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 

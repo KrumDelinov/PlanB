@@ -101,6 +101,8 @@ namespace PlanB.Services.Data
                     Id = user.Id,
                     PhomeNumber = user.PhoneNumber,
                     Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     Roles = userRoles
                 };
                 models.Add(userModel);
