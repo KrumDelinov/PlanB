@@ -98,7 +98,7 @@
 
             await signInManager.RefreshSignInAsync(currentUser);
             StatusMessage = "Your profile has been updated";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
