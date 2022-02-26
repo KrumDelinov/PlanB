@@ -10,7 +10,6 @@
   "profiles": {
     "AspNetCore6Template": {
       "commandName": "Project",
-      "workingDirectory": "C:\\PlamB\\AspNetCore6Template",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
