@@ -1,4 +1,5 @@
-﻿@model PlanB.Data.Models.Recipe
+﻿@using PlanB.Web.ViewModels.Employee.Recipe
+@model CreateRecipeViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -17,13 +18,26 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
+      
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
+
+                @for (var i = 0; i < Model.Ingradients.Count; i++)
+                {
+
+                    <input type="hidden" asp-for="Ingradients[i].Value" />
+                    <input asp-for="Ingradients[i].Selected" />
+
+                    @Model.Ingradients[i].Text
+                }
             </div>
-           
-            
+            @*<div class="form-group form-check">
+                <label class="form-check-label">
+                <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                </label>
+                </div>*@
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

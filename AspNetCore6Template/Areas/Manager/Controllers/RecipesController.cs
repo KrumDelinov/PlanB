@@ -1,8 +1,10 @@
 ﻿#nullable disable
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PlanB.Data;
 using PlanB.Data.Models;
+using PlanB.Web.ViewModels.Employee.Recipe;
 
 namespace PlanB.Areas.Manager.Controllers
 {
@@ -43,7 +45,14 @@ namespace PlanB.Areas.Manager.Controllers
         // GET: Manager/Recipes/Create
         public IActionResult Create()
         {
-            return View();
+            var ingradients = _context.Ingredients.Select(x => new SelectListItem()
+            {
+                Text = x.Product + x.Quantity.ToString(),
+                Value = x.Id.ToString()
+            }).ToList();
+
+            var viewModel = new CreateRecipeViewModel { Ingradients = ingradients };
+            return View(viewModel);
         }
 
         // POST: Manager/Recipes/Create
@@ -51,15 +60,31 @@ namespace PlanB.Areas.Manager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Recipe recipe)
+        public async Task<IActionResult> Create(CreateRecipeViewModel viewModel)
         {
+           
+
             if (ModelState.IsValid)
             {
+                var recipe = new Recipe { Name = viewModel.Name };
+
+                var ingradientsId = viewModel.Ingradients.Where(x => x.Selected).Select(i => i.Value);
+
+                
+                foreach (var item in ingradientsId)
+                {
+                    recipe.RecipesIngradients.Add(new RecipesIngradients
+                    {
+
+                        IngradientId = int.Parse(item)
+                    });
+                }
+
                 _context.Add(recipe);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(recipe);
+            return View(viewModel);
         }
 
         // GET: Manager/Recipes/Edit/5
