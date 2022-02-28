@@ -2,6 +2,7 @@
 using PlanB.Common;
 using PlanB.Services.Data.Contracts;
 using PlanB.Web.ViewModels.Employee.Batches;
+using System.Globalization;
 
 namespace PlanB.Areas.Manager.Controllers
 {
@@ -17,7 +18,12 @@ namespace PlanB.Areas.Manager.Controllers
         {
             return View();
         }
-  
+
+        public IActionResult Month()
+        {
+            return View();
+        }
+
 
         public IActionResult Reports(BatchDateViewModel batchDate)
         {
@@ -25,7 +31,7 @@ namespace PlanB.Areas.Manager.Controllers
             var bigBatchesCountList = new List<int>();
             var smallBatchesCountList = new List<int>();
 
-            var dateRange = batchesService.Range(batchDate.StartDade, batchDate.EndDate);
+            var dateRange = batchesService.WeeklyReport(batchDate.StartDade);
             //
 
             foreach (var day in dateRange)
@@ -52,5 +58,55 @@ namespace PlanB.Areas.Manager.Controllers
 
             return View(view);
         }
+
+        public IActionResult MonthlyReport(BatchDateViewModel batchDate)
+        {
+            var montNamehList = new List<string>();
+            var monthInthList = new List<int>();
+            var bigBatchesCountList = new List<int>();
+            var smallBatchesCountList = new List<int>();
+
+            var dateRange = batchesService.MontlyReport(batchDate.StartDade);
+           
+
+            foreach (var day in dateRange)
+            {
+                var monthName = day.ToString("MMM", CultureInfo.InvariantCulture);
+                var monthInth = day.Month;
+                bool containMonth = montNamehList.Contains(monthName);
+                if (!containMonth)
+                {
+                    montNamehList.Add(monthName);
+                    monthInthList.Add(monthInth);
+                }
+              
+
+            }
+
+            foreach (var month in monthInthList)
+            {
+                var bigBatches = batchesService.GetAllMonthlyBatches<BatchViewModel>(month, GlobalConstants.BigCup);
+                var smallBatches = batchesService.GetAllMonthlyBatches<BatchViewModel>(month, GlobalConstants.SmallCup);
+                var bigBatchCount = bigBatches.Count();
+                var smallBatchCount = smallBatches.Count();
+                bigBatchesCountList.Add(bigBatchCount);
+                smallBatchesCountList.Add(smallBatchCount);
+            }
+
+            
+            var monthsNameArray = montNamehList.ToArray();
+            var view = new MonthBatchesViewModel
+            {
+                BigBatchCounts = bigBatchesCountList.ToArray(),
+                SmallBatchesCount = smallBatchesCountList.ToArray(),
+                Months = monthsNameArray
+            };
+
+            //
+
+            return View(view);
+        }
+
+
     }
 }

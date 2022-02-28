@@ -26,13 +26,30 @@ namespace PlanB.Services.Data
             return result;
         }
 
+        public IEnumerable<T> GetAllMonthlyBatches<T>(int month, string batchSize)
+        {
+            var result = this.batchesRepository.All().Where(d => d.CreatedOn.Date.Month == month & d.Type == batchSize).To<T>().ToList();
+
+            return result;
+        }
+
         public IEnumerable<T> GetAllTodayBatches<T>()
         {
             return this.batchesRepository.All().Where(d => d.CreatedOn.Date.Date == DateTime.Today.Date).To<T>().ToList();
         }
 
-        public IEnumerable<DateTime> Range(DateTime startDate, DateTime endDate)
+        public IEnumerable<DateTime> MontlyReport(DateTime startDate)
         {
+            var endDate = startDate.AddMonths(5);
+            return Enumerable.Range(0, (endDate - startDate).Days + 1).Select(d => startDate.AddDays(d));
+        }
+
+        public IEnumerable<DateTime> WeeklyReport(DateTime startDate)
+        {
+            var endDate = startDate.AddDays(6);
+            
+            var month = startDate.ToString("MMMM");
+            //
             return Enumerable.Range(0, (endDate - startDate).Days + 1).Select(d => startDate.AddDays(d));
         }
     }

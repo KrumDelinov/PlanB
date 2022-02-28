@@ -24,7 +24,7 @@
 
             <!-- Main Content -->
             <div id="content">
-                <header>
+                @*<header>
                     <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
                         <div class="container">
                             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
@@ -42,8 +42,8 @@
                             </div>
                         </div>
                     </nav>
-                </header>
-                @*<partial name="_TopBarPartial" />*@
+                </header>*@
+                <partial name="_TopBarPartial" />
                 <div class="container-fluid">
                     <partial name="_CookieConsentPartial" />
                     <main role="main">
@@ -63,8 +63,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
-    @*<script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>*@
-    @*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
     <script src="~/vendor/jquery/jquery.min.js" asp-append-version="true"></script>
     <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
 
@@ -78,7 +78,7 @@
     <script src="~/vendor/chart.js/Chart.min.js" asp-append-version="true"></script>
 
     <!-- Page level custom scripts -->
-    @*<script src="~/js/demo/chart-area-demo.js" asp-append-version="true"></script>*@
+    <script src="~/js/demo/chart-area-demo.js" asp-append-version="true"></script>
     <script src="~/js/demo/chart-pie-demo.js" asp-append-version="true"></script>
 
     <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>

@@ -39,14 +39,14 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Massages</span>
+            <span>Reports</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Massages:</h6>
-                <a class="collapse-item" asp-action="Create">New Massage</a>
-                <a class="collapse-item" asp-action="Chat">Chat</a>
-                <a class="collapse-item" asp-action="All">My Massages</a>
+                <h6 class="collapse-header">Reports:</h6>
+                <a class="collapse-item" asp-area="Employee" asp-controller="Batches" asp-action="Index">All Report</a>
+                <a class="collapse-item" asp-area="Manager" asp-controller="Home" asp-action="Date">Weekly Report</a>
+                <a class="collapse-item" asp-area="Manager" asp-controller="Home" asp-action="Month">Monthly Report</a>
             </div>
         </div>
     </li>
@@ -79,6 +79,7 @@
     </div>
     @if (this.User.IsInRole(GlobalConstants.ManagerRoleName))
     {
+
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -97,30 +98,31 @@
         </li>
     }
 
-
     <!-- Nav Item - Charts -->
-     <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Reports</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Reports Screens:</h6>
-                    <a class="collapse-item" asp-area="Employee" asp-controller="Batches" asp-action="Index">All Report</a>
-                    <a class="collapse-item" asp-area="Manager" asp-controller="Home"  asp-action="Date">Weekly Report</a>
-                </div>
-            </div>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" asp-action="All">
+          <i class="fas fa-fw fa-table"></i>
+          <span>All Messages</span></a>
+      </li>
+    
+
+     <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" asp-action="Create">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Message</span>
+        </a>
+    </li>
    
 
+
     <!-- Nav Item - Tables -->
-    @*<li class="nav-item">
-        <a class="nav-link" href="tables.html">
+    <li class="nav-item">
+        <a class="nav-link" asp-action="Chat" asp-controller="Home" asp-area="">
             <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span>
+            <span>Chat</span>
         </a>
-    </li>*@
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

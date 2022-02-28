@@ -7,6 +7,7 @@
     using PlanB.Data.Models;
     using PlanB.Services.Data;
     using PlanB.Web.ViewModels;
+    using PlanB.Web.ViewModels.Employee.Home;
     using System.Diagnostics;
 
     public class HomeController : BaseController
@@ -53,7 +54,9 @@
         [Authorize]
         public IActionResult Chat()
         {
-            return this.View();
+            var user = userManager.GetUserAsync(this.User).GetAwaiter().GetResult();
+            var view = usersService.GetT<ChatViewModel>(user.Id);
+            return View(view);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
