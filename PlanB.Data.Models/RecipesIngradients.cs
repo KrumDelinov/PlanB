@@ -1,6 +1,8 @@
-﻿namespace PlanB.Data.Models
+﻿using PlanB.Data.Common.Models;
+
+namespace PlanB.Data.Models
 {
-    public class RecipesIngradients
+    public class RecipesIngradients : BaseDeletableModel<int>
     {
         public int RecipeId { get; set; }
 

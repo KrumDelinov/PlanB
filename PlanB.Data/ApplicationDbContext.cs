@@ -1,5 +1,6 @@
 ﻿namespace PlanB.Data
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using PlanB.Data.Common.Models;
@@ -60,7 +61,7 @@
         {
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
-            builder.Entity<RecipesIngradients>().HasKey(sc => new { sc.RecipeId, sc.IngradientId });
+      
 
             this.ConfigureUserIdentityRelations(builder);
 
