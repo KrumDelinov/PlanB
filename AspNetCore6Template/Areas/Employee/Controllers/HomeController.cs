@@ -64,9 +64,17 @@ namespace PlanB.Areas.Employee.Controllers
         {
             var user = userManager.GetUserAsync(this.User).GetAwaiter().GetResult();
 
-            var massage = this.massagesService.GetAll<MassageInfoViewModel>(user.UserName);
+            var massage = this.massagesService.GetAllUnread<MassageInfoViewModel>(user.UserName);
             var model = new AllMassagesViewModel { Massages = massage, StatusMessage = "Your profile has been updated" };
             return this.View(model);
+        }
+
+        public async Task< IActionResult> ReadMessage(int id)
+
+        {
+            await massagesService.ReadMessage(id);
+            var view = this.massagesService.GetMessageById<MassageInfoViewModel>(id);
+            return this.View(view);
         }
         public IActionResult CreateRecipe()
         {

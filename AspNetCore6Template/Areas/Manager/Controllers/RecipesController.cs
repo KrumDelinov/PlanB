@@ -75,7 +75,7 @@ namespace PlanB.Areas.Manager.Controllers
                 {
                     recipe.RecipesIngradients.Add(new RecipesIngradients
                     {
-
+                       
                         IngradientId = int.Parse(item)
                     });
                 }

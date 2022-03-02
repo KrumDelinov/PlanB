@@ -289,12 +289,18 @@ namespace PlanB.Data.Migrations
                 name: "RecipesIngradients",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RecipeId = table.Column<int>(type: "int", nullable: false),
-                    IngradientId = table.Column<int>(type: "int", nullable: false)
+                    IngradientId = table.Column<int>(type: "int", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipesIngradients", x => new { x.RecipeId, x.IngradientId });
+                    table.PrimaryKey("PK_RecipesIngradients", x => x.Id);
                     table.ForeignKey(
                         name: "FK_RecipesIngradients_Ingredients_IngradientId",
                         column: x => x.IngradientId,
@@ -392,6 +398,16 @@ namespace PlanB.Data.Migrations
                 name: "IX_RecipesIngradients_IngradientId",
                 table: "RecipesIngradients",
                 column: "IngradientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipesIngradients_IsDeleted",
+                table: "RecipesIngradients",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipesIngradients_RecipeId",
+                table: "RecipesIngradients",
+                column: "RecipeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",

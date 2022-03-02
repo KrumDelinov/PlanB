@@ -1,9 +1,9 @@
-﻿@using PlanB.Common
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using Microsoft.AspNetCore.Identity
+@using PlanB.Common
+@using PlanB.Data.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -21,10 +21,13 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+
+        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
+
+
     </li>
 
     <!-- Divider -->
@@ -99,21 +102,22 @@
     }
 
     <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" asp-action="All">
-          <i class="fas fa-fw fa-table"></i>
-          <span>All Messages</span></a>
-      </li>
-    
-
-     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" asp-action="Create">
+        <a class="nav-link" asp-action="All" asp-controller="Home" asp-area="Employee">
+            <i class="fas fa-fw fa-table"></i>
+            <span>All Messages</span>
+        </a>
+    </li>
+
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" asp-action="Create" asp-area="Employee">
             <i class="fas fa-fw fa-table"></i>
             <span>Message</span>
         </a>
     </li>
-   
+
 
 
     <!-- Nav Item - Tables -->

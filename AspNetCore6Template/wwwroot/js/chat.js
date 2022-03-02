@@ -12,6 +12,9 @@ connection.on("ReceiveMessage", function (user, message) {
     // is not interpreted as markup. If you're assigning in any other way, you 
     // should be aware of possible script injection concerns.
     li.textContent = `${user} says ${message}`;
+    var messageInput = document.getElementById("messageInput");
+    messageInput.nodeValue = "";
+
 });
 
 connection.start().then(function () {
@@ -24,6 +27,7 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     var user = document.getElementById("userInput").innerHTML;
     var message = document.getElementById("messageInput").value;
     connection.invoke("SendMessage", user, message).catch(function (err) {
+        
         return console.error(err.toString());
     });
     event.preventDefault();
