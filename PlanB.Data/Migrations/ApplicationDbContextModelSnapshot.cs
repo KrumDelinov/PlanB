@@ -405,15 +405,37 @@ namespace PlanB.Data.Migrations
 
             modelBuilder.Entity("PlanB.Data.Models.RecipesIngradients", b =>
                 {
-                    b.Property<int>("RecipeId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("IngradientId")
                         .HasColumnType("int");
 
-                    b.HasKey("RecipeId", "IngradientId");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("IngradientId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("RecipeId");
 
                     b.ToTable("RecipesIngradients");
                 });

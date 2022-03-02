@@ -137,7 +137,7 @@ namespace PlanB.Areas.Manager.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var ingradient = await _context.Ingredients.FindAsync(id);
-            _context.Ingredients.Remove(ingradient);
+            ingradient.IsDeleted = true;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

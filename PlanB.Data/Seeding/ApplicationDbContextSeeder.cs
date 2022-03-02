@@ -32,6 +32,7 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new IngradientsSeeder(),
                           };
 
                 foreach (var seeder in seeders)

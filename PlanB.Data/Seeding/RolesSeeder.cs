@@ -38,22 +38,35 @@
 
             if (!await userManager.Users.AnyAsync())
             {
-                var user = new ApplicationUser
+                var user1 = new ApplicationUser
                 {
                     FirstName = "Krum",
                     LastName = "Delinov",
                     UserName = "admin@gmail.com",
                     Email = "admin@gmail.com",
+                    PhoneNumber = "0888123456",
+                    EmailConfirmed = true,
+                };
+
+                var user2 = new ApplicationUser
+                {
+                    FirstName = "Krasi",
+                    LastName = "Panova",
+                    UserName = "krasi@abv.bg",
+                    Email = "krasi@abv.bg",
+                    PhoneNumber = "0888123456",
                     EmailConfirmed = true,
                 };
 
                 var password = "123456";
 
-                var result = await userManager.CreateAsync(user, password);
+                var result1 = await userManager.CreateAsync(user1, password);
+                var result2 = await userManager.CreateAsync(user2, password);
 
-                if (result.Succeeded)
+                if (result1.Succeeded & result2.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
+                    await userManager.AddToRoleAsync(user1, GlobalConstants.AdministratorRoleName);
+                 
                 }
             }
         }

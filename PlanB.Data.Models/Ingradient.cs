@@ -11,6 +11,6 @@ namespace PlanB.Data.Models
         [Required]
         public double Quantity { get; set; }
 
-        public ICollection<Recipe> RecipesIngradients { get; set; } = new HashSet<Recipe>();
+        public ICollection<RecipesIngradients> RecipesIngradients { get; set; } = new HashSet<RecipesIngradients>();
     }
 }
