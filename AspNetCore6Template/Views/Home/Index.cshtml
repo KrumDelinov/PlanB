@@ -1,9 +1,17 @@
 ﻿@using PlanB.Common
 @{
     this.ViewData["Title"] = "Home Page";
+    var roles = new List<string> { GlobalConstants.AdministratorRoleName, GlobalConstants.ManagerRoleName, GlobalConstants.EmploeeRoleName };
+    var isAdmin = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
+    var isManager = this.User.IsInRole(GlobalConstants.ManagerRoleName);
+    var isEmployee = this.User.IsInRole(GlobalConstants.EmploeeRoleName);
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+    @if(!isAdmin && !isEmployee && !isManager)
+    {
+        <h1> You are waitng for ...!</h1>
+    }
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

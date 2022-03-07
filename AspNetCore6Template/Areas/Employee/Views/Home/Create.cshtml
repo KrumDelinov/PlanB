@@ -19,14 +19,14 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div  class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
-                <select asp-for="UserName" class="form-control" asp-items=users></select>
+                <select id="userInput" asp-for="UserName" class="form-control" asp-items=users></select>
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <hr />
             <div class="form-group">
-                <input type="submit" value="Send" class="btn btn-primary" />
+                <input id="sendButton" type="submit" value="Send" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -40,6 +40,8 @@
 <script src="https://cdn.tiny.cloud/1/p33o4r4mjh39zgfef9wsm4z0syssfei8owpqhy9p9faj79zq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>tinymce.init({selector:'textarea'});</script>
 }
+
+
 
 
 

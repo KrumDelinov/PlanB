@@ -69,6 +69,8 @@ namespace PlanB.Areas.Employee.Controllers
             return this.View(model);
         }
 
+        
+
         public async Task< IActionResult> ReadMessage(int id)
 
         {
@@ -85,6 +87,12 @@ namespace PlanB.Areas.Employee.Controllers
         {
 
             return View();
+        }
+
+        public IActionResult MessageResult(int id)
+        {
+            var viewModel =  this.massagesService.GetMessageById<MessageReportViewModel>(id);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> CreateAsync()
@@ -109,8 +117,10 @@ namespace PlanB.Areas.Employee.Controllers
 
             this.TempData["InfoMessage"] = "Forum post created!";
 
-            return this.RedirectToAction(nameof(this.All));
+            return this.RedirectToAction(nameof(this.MessageResult), new {id = massageId});
         }
+
+       
 
     }
 }

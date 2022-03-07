@@ -17,7 +17,18 @@ namespace PlanB.Web.ViewModels.Employee.Home
 
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
-        public string ShortContent => new HtmlSanitizer().Sanitize(this.Content).Substring(0, 15);
+        public string ShortContent 
+        {
+            get { return this.SanitizedContent.Substring(0, 10) + "..."; }
+
+            set
+            {
+                if (value.Length < 10)
+                {
+                    new HtmlSanitizer().Sanitize(this.Content);
+                }
+            }
+        }
 
         public string UserFirstName { get; set; }
 

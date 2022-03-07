@@ -111,5 +111,15 @@ namespace PlanB.Services.Data
             var viewModel = new IndexViewModel() { Users = models };
             return viewModel;
         }
+
+        public async Task<string> GetUserId(string userName)
+        {
+            
+
+            var user = await userManager.FindByNameAsync(userName);
+
+            return await userManager.GetUserIdAsync(user);
+        }
+
     }
 }
