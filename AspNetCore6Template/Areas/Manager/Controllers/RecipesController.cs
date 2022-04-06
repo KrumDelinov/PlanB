@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PlanB.Data;
 using PlanB.Data.Models;
+using PlanB.Services.Data.Contracts;
 using PlanB.Web.ViewModels.Employee.Recipe;
 
 namespace PlanB.Areas.Manager.Controllers
@@ -12,11 +13,15 @@ namespace PlanB.Areas.Manager.Controllers
     public class RecipesController : ManagerController
     {
         private readonly ApplicationDbContext _context;
+        private readonly IRecipesService recipesService;
 
-        public RecipesController(ApplicationDbContext context)
+        public RecipesController(ApplicationDbContext context, IRecipesService recipesService)
         {
             _context = context;
+            this.recipesService = recipesService;
         }
+
+        public string StatusMessage { get; set; }
 
         // GET: Manager/Recipes
         public async Task<IActionResult> Index()
@@ -34,12 +39,13 @@ namespace PlanB.Areas.Manager.Controllers
 
             var recipe = await _context.Recipes
                 .FirstOrDefaultAsync(m => m.Id == id);
+            var viewModel = recipesService.Details(id);
             if (recipe == null)
             {
                 return NotFound();
             }
 
-            return View(recipe);
+            return View(viewModel);
         }
 
         // GET: Manager/Recipes/Create
@@ -50,21 +56,25 @@ namespace PlanB.Areas.Manager.Controllers
                 Text = x.Product + x.Quantity.ToString(),
                 Value = x.Id.ToString()
             }).ToList();
+           
 
             var viewModel = new CreateRecipeViewModel { Ingradients = ingradients };
             return View(viewModel);
         }
 
-        // POST: Manager/Recipes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateRecipeViewModel viewModel)
         {
-           
 
-            if (ModelState.IsValid)
+            if (viewModel.Ingradients == null)
+            {
+                this.TempData["InfoMessage"] = "First create ingradients";
+                return RedirectToAction("Create", "Ingradients");
+            }
+
+            if (ModelState.IsValid )
             {
                 var recipe = new Recipe { Name = viewModel.Name };
 

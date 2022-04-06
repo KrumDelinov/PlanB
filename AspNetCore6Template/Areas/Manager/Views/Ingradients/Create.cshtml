@@ -3,7 +3,12 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+@if (this.TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["InfoMessage"]
+    </div>
+}
 <h1>Create</h1>
 
 <h4>Ingradient</h4>

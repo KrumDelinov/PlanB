@@ -7,7 +7,7 @@ namespace PlanB.Services.Data.Contracts
     {
         void CreateRecipe();
 
-        RecipeDetailsViewModel Details();
+        RecipeDetailsViewModel Details(int? id);
 
         T GetT<T>(string name);
 
