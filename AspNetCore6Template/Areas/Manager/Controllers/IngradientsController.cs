@@ -43,6 +43,8 @@ namespace PlanB.Areas.Manager.Controllers
         // GET: Employee/Ingradients/Create
         public IActionResult Create()
         {
+            
+            
             return View();
         }
 

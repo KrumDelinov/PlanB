@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PlanB.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitiaCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -289,10 +289,9 @@ namespace PlanB.Data.Migrations
                 name: "RecipesIngradients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     RecipeId = table.Column<int>(type: "int", nullable: false),
                     IngradientId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -300,7 +299,7 @@ namespace PlanB.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipesIngradients", x => x.Id);
+                    table.PrimaryKey("PK_RecipesIngradients", x => new { x.RecipeId, x.IngradientId });
                     table.ForeignKey(
                         name: "FK_RecipesIngradients_Ingredients_IngradientId",
                         column: x => x.IngradientId,
@@ -403,11 +402,6 @@ namespace PlanB.Data.Migrations
                 name: "IX_RecipesIngradients_IsDeleted",
                 table: "RecipesIngradients",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RecipesIngradients_RecipeId",
-                table: "RecipesIngradients",
-                column: "RecipeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",
