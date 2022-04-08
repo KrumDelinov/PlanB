@@ -7,6 +7,8 @@ namespace PlanB.Services.Data
     {
         IEnumerable<T> GetAll<T>();
 
+        IEnumerable<T> GetAllOtherUsers<T>(string id);
+
         Task<IndexViewModel> GetUsersWithRolesAsync();
 
         Task<EditUserViewModel> EditUser(string id);

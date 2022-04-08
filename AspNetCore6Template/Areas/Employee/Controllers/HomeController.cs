@@ -97,8 +97,8 @@ namespace PlanB.Areas.Employee.Controllers
 
         public async Task<IActionResult> CreateAsync()
         {
-
-            var users = usersService.GetAll<UserDropDownViewModel>();
+            var user = await userManager.GetUserAsync(this.User);
+            var users = usersService.GetAllOtherUsers<UserDropDownViewModel>(user.Id);
             var viewModel = new MassageViewModel { Users = users };
             return this.View(viewModel);
         }

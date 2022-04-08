@@ -30,14 +30,24 @@ namespace PlanB.Services.Data
 
         }
 
-        public RecipeDetailsViewModel Details()
+        public RecipeDetailsViewModel Details(int? id)
         {
-            var recipe = recipeRepository.All().Where(x => x.Id == 2).FirstOrDefault();
+            var recipe = recipeRepository.All().Where(x => x.Id == id).Select(i => new RecipeDetailsViewModel
+            {
+                Id = i.Id,
+                Name = i.Name,
+                Ingradients = i.RecipesIngradients.Select(i => new IngradientViewModel
+                {
+                    Id = i.IngradientId,
+                    Name = i.Ingradient.Product,
+                    Quantity = i.Ingradient.Quantity
+                }).ToList()
+            }).FirstOrDefault();
 
-            var ingradients = new List<IngradientViewModel>();
+           
 
 
-            var viewModel = new RecipeDetailsViewModel { Name = recipe.Name, Ingradients = ingradients };
+            var viewModel = recipe;
             return viewModel;
         }
 

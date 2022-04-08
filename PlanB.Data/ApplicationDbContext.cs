@@ -61,7 +61,17 @@
         {
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
-      
+
+            builder.Entity<RecipesIngradients>()
+                .HasKey(bc => new { bc.RecipeId, bc.IngradientId });
+            builder.Entity<RecipesIngradients>()
+                .HasOne(bc => bc.Recipe)
+                .WithMany(b => b.RecipesIngradients)
+                .HasForeignKey(bc => bc.RecipeId);
+            builder.Entity<RecipesIngradients>()
+                .HasOne(bc => bc.Ingradient)
+                .WithMany(c => c.RecipesIngradients)
+                .HasForeignKey(bc => bc.IngradientId);
 
             this.ConfigureUserIdentityRelations(builder);
 

@@ -121,5 +121,13 @@ namespace PlanB.Services.Data
             return await userManager.GetUserIdAsync(user);
         }
 
+        public  IEnumerable<T> GetAllOtherUsers<T>(string id)
+        {
+            
+
+            var users = this.usersRepository.All().Where(i => i.Id != id).To<T>().ToList();
+
+            return users;
+        }
     }
 }

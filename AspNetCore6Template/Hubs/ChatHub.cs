@@ -33,6 +33,7 @@ namespace PlanB.Hubs
             var userId = await usersService.GetUserId(userName);
             //await Clients.All.SendAsync("ReceiveMessage", userId);
             await Clients.User(userId).SendAsync("ReceiveMessage", userId);
+            
         }
 
     }
