@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using PlanB.Common;
 using PlanB.Data;
 using PlanB.Data.Models;
+using PlanB.Services.Data.Contracts;
+using PlanB.Web.ViewModels.Employee.Tanks;
 
 namespace PlanB.Areas.Manager.Controllers
 {
@@ -13,16 +15,69 @@ namespace PlanB.Areas.Manager.Controllers
     public class TanksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ITanksServise tanksServise;
 
-        public TanksController(ApplicationDbContext context)
+        public TanksController(ApplicationDbContext context, ITanksServise tanksServise)
         {
             _context = context;
+            this.tanksServise = tanksServise;
         }
 
         // GET: Manager/Tanks
         public async Task<IActionResult> Index()
         {
             return View(await _context.Tanks.ToListAsync());
+        }
+
+        public IActionResult FillTank(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tank = tanksServise.GetT<FillTankViewModel>(id);
+
+            if (tank == null)
+            {
+                return NotFound();
+            }
+
+            return View(tank);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FillTank(int id, FillTankViewModel tankViewModel)
+        {
+            if (id != tankViewModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var tank = await _context.Tanks
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                    tank.Amount += tankViewModel.Amount;
+                    _context.Update(tank);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TankExists(tankViewModel.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(tankViewModel);
         }
 
         // GET: Manager/Tanks/Details/5
@@ -49,7 +104,7 @@ namespace PlanB.Areas.Manager.Controllers
             return View();
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Amount,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Tank tank)
@@ -95,6 +150,8 @@ namespace PlanB.Areas.Manager.Controllers
             {
                 try
                 {
+
+
                     _context.Update(tank);
                     await _context.SaveChangesAsync();
                 }

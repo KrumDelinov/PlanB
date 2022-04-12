@@ -30,6 +30,12 @@ namespace PlanB.Services.Data
             return tankRepository.All().To<T>().ToList();
         }
 
+        public T GetT<T>(int? id)
+        {
+            var tank = tankRepository.All().Where(i => i.Id == id).To<T>().FirstOrDefault();
+            return tank;    
+        }
+
         public async Task UpdateTanksAsync(string recipeName)
         {
             var recipe = recipesService.GetRecipe(recipeName);

@@ -4,5 +4,7 @@
     {
         IEnumerable<T> GetAll<T>();
         Task UpdateTanksAsync(string recipeName);
+
+        T GetT<T>(int? id);
     }
 }

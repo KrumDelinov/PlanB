@@ -17,7 +17,7 @@
         </h6>
         @foreach (var message in @Model.Messages)
         {
-            <a class="dropdown-item d-flex align-items-center" href="#">
+            <a class="dropdown-item d-flex align-items-center" asp-action="ReadMessage" asp-controller="Home" asp-area="Employee"  asp-route-id="@message.Id">
                 <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
                     <div class="status-indicator bg-success"></div>

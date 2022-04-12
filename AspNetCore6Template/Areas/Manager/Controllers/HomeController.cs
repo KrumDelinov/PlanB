@@ -24,6 +24,11 @@ namespace PlanB.Areas.Manager.Controllers
             return View();
         }
 
+        public IActionResult Test()
+        {
+            return View();
+        }
+
 
         public IActionResult Reports(BatchDateViewModel batchDate)
         {
@@ -55,7 +60,7 @@ namespace PlanB.Areas.Manager.Controllers
                 SmallBatchesCount = smallBatchesCountList.ToArray(),
                 WeekDays = weekDaysArray
             };
-
+            
             return View(view);
         }
 
