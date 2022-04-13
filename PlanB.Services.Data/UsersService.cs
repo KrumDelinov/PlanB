@@ -27,6 +27,7 @@ namespace PlanB.Services.Data
 
         public async Task<EditUserViewModel> EditUser(string id)
         {
+            
             var user = await userManager.FindByIdAsync(id);
             var userName = await userManager.GetUserNameAsync(user);
             var phoneNumber = await userManager.GetPhoneNumberAsync(user);
@@ -128,6 +129,12 @@ namespace PlanB.Services.Data
             var users = this.usersRepository.All().Where(i => i.Id != id).To<T>().ToList();
 
             return users;
+        }
+
+        public async Task<ApplicationUser> GetUserByUserName(string userName)
+        {
+            var user = await userManager.FindByNameAsync(userName);
+            return user;
         }
     }
 }

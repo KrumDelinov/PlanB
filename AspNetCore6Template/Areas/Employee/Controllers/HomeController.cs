@@ -31,6 +31,15 @@ namespace PlanB.Areas.Employee.Controllers
         }
         public IActionResult Index()
         {
+
+            var batches = batchService.GetAllTodayBatches<BatchViewModel>();
+            var view = new BatchesListViewModel { Batches = batches };
+
+            return this.View(view);
+        }
+
+        public IActionResult DalyBatches()
+        {
             var batches = batchService.GetAllTodayBatches<BatchViewModel>();
             var view = new BatchesListViewModel { Batches = batches };
 

@@ -18,5 +18,7 @@ namespace PlanB.Services.Data
         T GetT<T>(string userId);
 
         Task<string> GetUserId(string fullName);
+
+        Task<ApplicationUser> GetUserByUserName(string userName);
     }
 }

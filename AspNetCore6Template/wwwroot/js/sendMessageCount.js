@@ -1,36 +1,20 @@
-﻿"use strict";
+﻿document.addEventListener('DOMContentLoaded', function () {
+    "use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/Chat").build();
+    var connection = new signalR.HubConnectionBuilder().withUrl("/Chat").build();
 
-//Disable the send button until connection is established.
-//document.getElementById("sendButton").disabled = true;
+   
 
-connection.on("ReceiveMessage", function (userId) {
+    connection.start()
+        .then(function () {
+            console.log('connection started');
+            var userToSend = document.getElementById("userInput").innerText;
+            var messageId = document.getElementById("messageId").innerHTML;
+            var currentUser = document.getElementById("currentUser").innerHTML;
+            connection.invoke("SendMessageCount", userToSend, messageId, currentUser)
+                .catch(error => {
+                    console.error(error.message);
+                });
 
-    var countEl = document.getElementById("messageCount");
-    var parsed = parseInt(countEl.innerText);
-    parsed += 1;
-    countEl.innerHTML = parsed;
-
-
-
+        });
 });
-
-connection
-    .start();
-
-
-
-window.addEventListener("load", function () {
-
-    let userName = document.getElementById("userInput").innerHTML;
-    console.log(userName);
-    connection.invoke("SendMessageCount", userName);
-
-});
-
-
-
-
-
-

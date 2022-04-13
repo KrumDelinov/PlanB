@@ -1,8 +1,9 @@
 ﻿@using PlanB.Common
 @using PlanB.Web.ViewModels.Employee.Tanks
 @using PlanB.Web.ViewModels.Employee.Batches
+@model BatchesListViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "DalyBatches";
 
 }
 
@@ -11,32 +12,23 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <h1 class="h3 mb-0 text-gray-800">DalyBatches</h1>
     </div>
 
     <!-- Content Row -->
 
 
-    <div class="row">
-        @await Component.InvokeAsync("Tanks")
-        @await Component.InvokeAsync("Chat")
-
-    </div>
+    
 
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <a  asp-controller="Home" asp-action="DalyBatches" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> DalyBatches</a>
-
+        <h1 class="h3 mb-2 text-gray-800">Batches</h1>
 
         <!-- DataTales Example -->
-    <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                     <a id="smallCup" asp-controller="Batches" asp-action="CreateSmallCup" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> New Small Batch</a>
-                    <a id="bigCup" asp-controller="Batches" asp-action="CreateBigCup" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> New Big Batch</a>
-                </div>
+              
 
             </div>
             <div class="card-body">
@@ -77,7 +69,6 @@
     </div>
 
 </div>
-
 
 
 

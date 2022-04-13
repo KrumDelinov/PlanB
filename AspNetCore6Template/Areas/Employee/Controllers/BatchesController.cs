@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using PlanB.Common;
 using PlanB.Data;
 using PlanB.Data.Models;
+using PlanB.Hubs;
 using PlanB.Services.Data.Contracts;
 using PlanB.Web.ViewModels.Employee.Batches;
 
@@ -18,17 +20,20 @@ namespace PlanB.Areas.Employee.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ITanksServise tanksServise;
         private readonly IBatchesService batchesService;
+        private readonly IHubContext<ChatHub> hubContext;
 
         public BatchesController(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             ITanksServise tanksServise,
-            IBatchesService batchesService)
+            IBatchesService batchesService,
+            IHubContext<ChatHub> hubContext)
         {
             _context = context;
             this.userManager = userManager;
             this.tanksServise = tanksServise;
             this.batchesService = batchesService;
+            this.hubContext = hubContext;
         }
 
         // GET: Employee/Batches
@@ -66,6 +71,7 @@ namespace PlanB.Areas.Employee.Controllers
             await tanksServise.UpdateTanksAsync(batch.Type);
             _context.Add(batch);
             await _context.SaveChangesAsync();
+           
             return RedirectToAction("Index", "Home");
         }
 
@@ -76,6 +82,7 @@ namespace PlanB.Areas.Employee.Controllers
             await tanksServise.UpdateTanksAsync(batch.Type);
             _context.Add(batch);
             await _context.SaveChangesAsync();
+            
             return RedirectToAction("Index", "Home");
         }
 
