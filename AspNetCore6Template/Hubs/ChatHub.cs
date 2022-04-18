@@ -24,13 +24,13 @@ namespace PlanB.Hubs
             this._context = context;
         }
 
-        public string UserFullName { get; set; }
+       
 
-        public async Task Send(string message)
+        public async Task Send(string userName, string message)
         {
+            var currentUserName = await GetCurrentUserNameAsync(userName);
             await this.Clients.All.SendAsync(
-                "NewMessage",
-                new Message { User = this.Context.User.Identity.Name, Text = message, });
+                "ReceiveMessage", currentUserName, message);
         }
         public async Task SendMessage(string user, string message)
         {
@@ -56,7 +56,8 @@ namespace PlanB.Hubs
         {
             var currentUser = await usersService.GetUserByUserName(userNameFrom);
 
-            var userFullName = $"{currentUser.FirstName} {currentUser.LastName}";
+            var userFullName = await GetCurrentUserNameAsync(userNameFrom);
+
 
            
             var batch = new Batch { Type = GlobalConstants.SmallCup, UserId = currentUser.Id };
@@ -67,5 +68,13 @@ namespace PlanB.Hubs
             await Clients.All.SendAsync("ReceiveReport", userFullName, batch.Type);
         }
 
+        public async Task<string> GetCurrentUserNameAsync(string userNameFrom)
+        {
+            var currentUser = await usersService.GetUserByUserName(userNameFrom);
+
+            var userFullName = $"{currentUser.FirstName} {currentUser.LastName}";
+
+            return userFullName;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@using PlanB.Web.ViewModels.Employee.Tanks
 @model TanksListViewModel
 @{
-    var test = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Tanks);
+    
 }
 
 
@@ -38,8 +38,6 @@
     function drawChart() {
 
      var weekDayArray = @Html.Raw(Json.Serialize(Model.Tanks));
-     // var arr = JSON.parse('@Html.Raw(Json.Serialize(@Model.Tanks))');
-      //var something = JSON.parse('@Html.Raw(Json.Serialize(Model.Tanks))');
 
       weekDayArray.forEach(element => {
        var data = google.visualization.arrayToDataTable([

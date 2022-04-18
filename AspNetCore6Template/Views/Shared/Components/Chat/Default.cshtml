@@ -4,47 +4,33 @@
 
 @*<h1>@this.ViewBag.Title</h1>*@
 
-@*<div class="container">
-    <div class="row">&nbsp;</div>
-    <div class="row">
-    <div class="col-2">User</div>
-    <div class="col-4"><input type="text" id="userInput" /></div>
-    </div>
-    <div class="row">
-    <div class="col-2">Message</div>
-    <div class="col-4"><input type="text" id="messageInput" /></div>
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-    <div class="col-6">
-    <input type="button" id="sendButton" value="Send Message" />
-    </div>
-    </div>
-    </div>
-    <div class="row">
-    <div class="col-12">
-    <hr />
-    </div>
-    </div>
-    <div class="row">
-    <div class="col-6">
-    <ul id="messagesList"></ul>
-    </div>
-    </div>*@
-<!-- Pending Requests Card Example -->
-<!-- Pending Requests Card Example -->
-<div class="col-xl-3 col-md-6 mb-4">
+
+
+<div class="col-xl-3 col-md-6 mb-4 ">
     <div class="card border-left-warning shadow h-100 py-2">
-        <div class="card-body">
+        <div class="card-body ">
             <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+
+                <div class="row">
+                    <div class="col-4"><textarea id="chatInput"></textarea></div>
                 </div>
+                <hr />
                 <div class="col-auto">
-                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    <input type="button" id="sendChat" value="Send Message" />
                 </div>
             </div>
+            <div class="row ">&nbsp;</div>
+            <div class="overflow-auto" style="height: 100px; overflow-y: scroll;">
+                <article>
+                    <ul id="messagesList">
+                       
+                    </ul>
+                </article>
+            </div>
+
         </div>
     </div>
 </div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat2.js"></script>
