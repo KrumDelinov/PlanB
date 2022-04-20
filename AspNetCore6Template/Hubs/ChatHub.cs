@@ -30,7 +30,7 @@ namespace PlanB.Hubs
         {
             var currentUserName = await GetCurrentUserNameAsync(userName);
             await this.Clients.All.SendAsync(
-                "ReceiveMessage", currentUserName, message);
+                "ReceiveChatMessage", currentUserName, message);
         }
         public async Task SendMessage(string user, string message)
         {

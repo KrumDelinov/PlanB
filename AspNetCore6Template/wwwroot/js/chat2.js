@@ -7,7 +7,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/Chat").build();
 //Disable the send button until connection is established.
 document.getElementById("sendChat").disabled = true;
 
-connection.on("ReceiveMessage", function (user, message) {
+connection.on("ReceiveChatMessage", function (user, message) {
     var message = document.getElementById("chatInput");
     var li = document.createElement("li");
     document.getElementById("messagesList").appendChild(li);
