@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
+using OfficeOpenXml.Table;
 using PlanB.Common;
 using PlanB.Data;
 using PlanB.Data.Models;
@@ -43,6 +45,25 @@ namespace PlanB.Areas.Employee.Controllers
             var view = new BatchesListViewModel { Batches = batches };
 
             return this.View(view);
+        }
+
+        [HttpPost]
+        public IActionResult Index(IFormCollection obj)
+        {
+            string reportname = $"User_Wise_{Guid.NewGuid():N}.xlsx";
+            var list = batchesService.GetAll<BatchViewModel>().ToList();
+
+            if (list.Count > 0)
+            {
+                var exportbytes = ExporttoExcel<BatchViewModel>(list, reportname);
+                return File(exportbytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", reportname);
+            }
+            else
+            {
+                TempData["Message"] = "No Data to Export";
+                return View();
+            }
+              
         }
 
         // GET: Employee/Batches/Details/5
@@ -201,6 +222,13 @@ namespace PlanB.Areas.Employee.Controllers
         private bool BatchExists(int id)
         {
             return _context.Batches.Any(e => e.Id == id);
+        }
+        private byte[] ExporttoExcel<T>(List<T> table, string filename)
+        {
+            using ExcelPackage pack = new ExcelPackage();
+            ExcelWorksheet ws = pack.Workbook.Worksheets.Add(filename);
+            ws.Cells["A1"].LoadFromCollection(table, true, TableStyles.Light1);
+            return pack.GetAsByteArray();
         }
     }
 }

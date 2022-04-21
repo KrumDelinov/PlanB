@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "All Batches";
 
-    
+
 }
 
 
@@ -24,7 +24,7 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-          
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -57,6 +57,23 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Download Report</h3>
+                </div>
+                <form autocomplete="off" asp-controller="Batches" asp-antiforgery="true" asp-action="Index" method="post">
+                    <div class="card-body register-card-body">
+                        <div class="form-row">
+                            <button type="submit" id="btnsubmit" class="btn btn-success">Export to Excel</button>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                    </div>
+                </form>
             </div>
         </div>
 
